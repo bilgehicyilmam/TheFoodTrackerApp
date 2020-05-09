@@ -1,0 +1,47 @@
+@import "_variables";
+
+.filter {
+  background-color: $color-grey-light;
+  font-size: $default-font-size;
+  padding: 1.5rem 2rem;
+  &::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  &__dropdown-box {
+    float: left;
+  }
+
+  &__label {
+    margin-right: 1rem;
+  }
+
+  &__dropdown {
+    padding: 0.8rem 1.2rem;
+  }
+
+  &__dropdown:not(:last-child) {
+    margin-right: 0.5rem;
+  }
+  &__search-box {
+    float: right;
+  }
+
+  &__search {
+    padding: 0.8rem 1.2rem;
+    padding-left: 2.5rem;
+    background: url(/assets/icons/search.svg) no-repeat 0.7rem 1rem;
+    background-color: $color-white;
+  }
+
+  &--loading {
+    background: url(/assets/icons/spinner.gif) no-repeat 0.7rem 1rem;
+    background-size: 1.3rem 1.3rem;
+  }
+
+  &__search::placeholder {
+    font-style: italic;
+  }
+}

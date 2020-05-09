@@ -1,0 +1,14 @@
+<section class="section-heading">
+  <h1 class="heading-primary">
+    Recipes
+  </h1>
+  <button class="btn btn-primary add-button">
+    Add recipe
+  </button>
+</section>
+<section class="section-filter">
+  <app-recipe-filter (searched)="onSearched($event)"></app-recipe-filter>
+</section>
+<section class="section-list">
+  <app-recipe-list [recipes]="recipes | recipefilter: filterByRecipeName"></app-recipe-list>
+</section>

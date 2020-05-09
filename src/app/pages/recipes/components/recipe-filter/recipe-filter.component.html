@@ -1,0 +1,15 @@
+<div class="filter">
+  <div class="filter__dropdown-box">
+        <span class="filter__label">
+            Filter by:
+        </span>
+<!--    <app-multi-select label="Status" [options]="statusOptions" (selectionChange)="onSelectionChange($event, 'status')" class="mr-sm"></app-multi-select>-->
+<!--    <app-multi-select label="Date" [options]="dateOptions" (selectionChange)="onSelectionChange($event, 'date')" class="mr-sm"></app-multi-select>-->
+<!--    <app-multi-select label="Shift" [options]="shiftOptions" (selectionChange)="onSelectionChange($event, 'shift')" class="mr-sm"></app-multi-select>-->
+<!--    <app-multi-select label="Area" [options]="areaOptions" (selectionChange)="onSelectionChange($event, 'area')" [multiple]="false"></app-multi-select>-->
+  </div>
+  <div class="filter__search-box">
+    <input type="text" class="filter__search" [class.filter--loading]="searchLoading" [(ngModel)]="recipeName" (ngModelChange)="onSearchChange(recipeName)"
+           placeholder="Search recipes...">
+  </div>
+</div>
