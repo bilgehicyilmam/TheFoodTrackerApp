@@ -1,0 +1,36 @@
+@import "_variables";
+
+.header {
+  height: $header-height;
+  background-color: $color-dark;
+
+  &__logo {
+    height: 100%;
+    display: flex;
+    margin-left: 2rem;
+  }
+
+  &__img {
+    align-self: center;
+  }
+}
+
+.main {
+  min-height: calc(100vh - #{$header-height});
+  display: flex;
+
+  &__right {
+    flex: 0 0 6.4rem;
+    background-color: $color-medium;
+  }
+
+  &__left {
+    flex: 1;
+    padding: 4rem;
+  }
+}
+
+.empty_box {
+  height: 60rem;
+  background-color: orangered;
+}
