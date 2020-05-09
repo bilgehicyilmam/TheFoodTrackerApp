@@ -1,0 +1,42 @@
+.table {
+  font-size: $default-font-size;
+  width: 100%;
+  max-width: 100%;
+  border-collapse: collapse;
+
+  thead {
+    padding: 0.8rem 2.1rem;
+  }
+
+  tbody {
+    background-color: $color-white;
+  }
+
+  th {
+    vertical-align: bottom;
+    text-align: left;
+    padding: 2rem;
+  }
+
+  td {
+    padding: 2rem;
+  }
+
+  tbody td,
+  tbody th {
+    border-top: 1px solid $color-grey;
+  }
+
+  tbody tr:last-child td,
+  tbody tr:last-child th {
+    border-bottom: 1px solid $color-grey;
+  }
+
+  tbody th {
+    border-left: 1px solid $color-grey;
+  }
+
+  tbody tr td:last-child {
+    border-right: 1px solid $color-grey;
+  }
+}
