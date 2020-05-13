@@ -1,0 +1,24 @@
+<app-modal (closed)="closed.emit()" [showModal]="showModal" title="Create Recipe">
+  <form action="" class="form">
+    <div>
+      <label for="name" class="form__label">Name</label>
+      <input id="name" class="form__input" name="name" type="text" value="" autocapitalize="off" autocorrect="off">
+    </div>
+    <div class="mt-sm">
+      <label for="description" class="form__label">Description</label>
+      <input id="description" class="form__input" name="description" type="text" value="" autocapitalize="off"
+             autocorrect="off">
+    </div>
+    <div class="mt-sm">
+      <label for="file" class="form__label">Recipe image</label>
+      <input id="file" class="form__file-input" name="Nick" type="file" value="" autocapitalize="off" autocorrect="off">
+    </div>
+    <div class="mt-sm" style="text-align: right">
+      <button class="btn btn-success add-button mt-md" (click)="showModal = true">
+        Add recipe
+      </button>
+    </div>
+
+  </form>
+
+</app-modal>

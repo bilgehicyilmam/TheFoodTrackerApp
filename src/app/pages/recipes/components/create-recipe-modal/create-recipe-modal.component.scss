@@ -1,0 +1,36 @@
+.form {
+  &__fieldset {
+    border: none;
+    margin: 0;
+    margin-inline-start: 0;
+    margin-inline-end: 0;
+  }
+
+  &__label {
+    display: block;
+    margin-bottom: 0.5rem;
+    width: 100%;
+    height: auto;
+    font-size: 1.6rem;
+  }
+
+  &__input[type=text] {
+    width: 100%;
+    max-width: 100%;
+    transition: border linear .2s, box-shadow linear .2s;
+    padding: 8px 8px;
+    border: 1px solid #b0bec5;
+    border-radius: 2px;
+    font-size: 1.6rem;
+
+    &:focus {
+      border: 1px solid #b0bec5 !important;
+      box-shadow: none;
+      outline: none;
+    }
+  }
+
+  &__file-input {
+    font-size: 1.6rem;
+  }
+}

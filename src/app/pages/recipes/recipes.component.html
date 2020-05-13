@@ -2,7 +2,7 @@
   <h1 class="heading-primary">
     Recipes
   </h1>
-  <button class="btn btn-primary add-button">
+  <button class="btn btn-primary add-button" (click)="showModal = true">
     Add recipe
   </button>
 </section>
@@ -12,3 +12,5 @@
 <section class="section-list">
   <app-recipe-list [recipes]="recipes | recipefilter: filterByRecipeName"></app-recipe-list>
 </section>
+
+<app-create-recipe-modal [showModal]="showModal" (closed)="showModal = false"></app-create-recipe-modal>

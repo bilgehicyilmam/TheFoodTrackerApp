@@ -6,10 +6,11 @@ import { SharedModule } from '../../shared/shared.module';
 import { RecipeListComponent } from './components/recipe-list/recipe-list.component';
 import { RecipeFilterComponent } from './components/recipe-filter/recipe-filter.component';
 import { FormsModule } from '@angular/forms';
+import { CreateRecipeModalComponent } from './components/create-recipe-modal/create-recipe-modal.component';
 
 
 @NgModule({
-  declarations: [RecipesComponent, RecipeListComponent, RecipeFilterComponent],
+  declarations: [RecipesComponent, RecipeListComponent, RecipeFilterComponent, CreateRecipeModalComponent],
   imports: [
     CommonModule,
     SharedModule,

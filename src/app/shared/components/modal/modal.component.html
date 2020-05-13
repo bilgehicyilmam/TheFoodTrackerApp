@@ -1,0 +1,15 @@
+
+<!-- The Modal -->
+<div id="myModal" class="modal" [style.display]="showModal ? 'block': 'none'" (click)="closed.emit()">
+
+  <!-- Modal content -->
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <span class="close" (click)="closed.emit()">&times;</span>
+      <h2>{{ title }}</h2>
+    </div>
+    <div class="modal-body">
+      <ng-content></ng-content>
+    </div>
+  </div>
+</div>

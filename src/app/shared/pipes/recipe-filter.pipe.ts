@@ -14,7 +14,7 @@ export class RecipeFilterPipe implements PipeTransform {
 
     return value.filter(r => {
       const name = r.name.toLowerCase();
-      return name.indexOf(filter.toLowerCase()) > -1
+      return name.indexOf(filter.toLowerCase()) > -1;
     });
   }
 }

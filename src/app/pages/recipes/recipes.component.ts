@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Recipe } from '../../shared/models/recipe';
 import { RecipeService } from '../../shared/services/recipe.service';
 
@@ -8,9 +8,12 @@ import { RecipeService } from '../../shared/services/recipe.service';
   styleUrls: ['./recipes.component.scss']
 })
 export class RecipesComponent implements OnInit {
+
   recipes: Recipe[];
 
   filterByRecipeName: string;
+
+  showModal: boolean;
 
   constructor(private recipeService: RecipeService) {
   }

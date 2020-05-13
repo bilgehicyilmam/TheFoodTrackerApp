@@ -6,12 +6,13 @@ import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { LimitPipe } from './pipes/limit.pipe';
 import { RecipeFilterPipe } from './pipes/recipe-filter.pipe';
+import { ModalComponent } from './components/modal/modal.component';
 
 
 @NgModule({
   imports: [RouterModule, HttpClientModule],
-  exports: [OrderPipe, NavigationComponent, LimitPipe, RecipeFilterPipe],
-  declarations: [OrderPipe, NavigationComponent, LimitPipe, RecipeFilterPipe],
+  exports: [OrderPipe, NavigationComponent, LimitPipe, RecipeFilterPipe, ModalComponent],
+  declarations: [OrderPipe, NavigationComponent, LimitPipe, RecipeFilterPipe, ModalComponent],
   providers: [RecipeService],
 })
 export class SharedModule {
