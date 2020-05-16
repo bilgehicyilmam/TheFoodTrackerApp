@@ -1,33 +1,32 @@
-<ng-template ngFor let-row [ngForOf]="recipeRows">
-  <div class="row align-row">
-    <div class="col-3 mb-lg" *ngFor="let recipe of row">
-      <div class="recipe">
-        <img [src]="recipe.thumbUrl" alt="" class="recipe__img">
-        <div class="recipe__details">
-          <h2>
-            {{ recipe.name }}
-          </h2>
-          <div class="recipe__rating">
-            <span class="fa fa-star" [class.checked]="recipe.rating >= 1"></span>
-            <span class="fa fa-star" [class.checked]="recipe.rating >= 2"></span>
-            <span class="fa fa-star" [class.checked]="recipe.rating >= 3"></span>
-            <span class="fa fa-star" [class.checked]="recipe.rating >= 4"></span>
-            <span class="fa fa-star" [class.checked]="recipe.rating >= 5"></span>
-            <span class="recipe__number-of-comments">
+<div class="row">
+  <div class="col-3 mb-lg" *ngFor="let recipe of recipesArray">
+    <div class="recipe">
+      <img [src]="recipe.thumbUrl" alt="" class="recipe__img">
+      <div class="recipe__details">
+        <h2>
+          {{ recipe.name }}
+        </h2>
+        <div class="recipe__rating">
+          <span class="fa fa-star" [class.checked]="recipe.rating >= 1"></span>
+          <span class="fa fa-star" [class.checked]="recipe.rating >= 2"></span>
+          <span class="fa fa-star" [class.checked]="recipe.rating >= 3"></span>
+          <span class="fa fa-star" [class.checked]="recipe.rating >= 4"></span>
+          <span class="fa fa-star" [class.checked]="recipe.rating >= 5"></span>
+          <span class="recipe__number-of-comments">
             {{recipe.numberOfComments}}
           </span>
-          </div>
-          <div class="recipe__description">
-            {{recipe.description | limit:100}}
-          </div>
-          <div class="recipe__created-by">
-            <img [src]="recipe.createdBy.thumb" alt="" class="recipe__user-img">
-            <span>
+        </div>
+        <div class="recipe__description">
+          {{recipe.description | limit:100}}
+        </div>
+        <div class="recipe__created-by">
+          <img [src]="recipe.createdBy.thumb" alt="" class="recipe__user-img">
+          <span>
             {{ recipe.createdBy.name }}
           </span>
-          </div>
         </div>
       </div>
     </div>
+
   </div>
-</ng-template>
+</div>

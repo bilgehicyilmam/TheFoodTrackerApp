@@ -19,6 +19,9 @@
   float: right;
   font-size: 28px;
   font-weight: bold;
+  right: 3rem;
+  top: 1rem;
+  position: absolute;
 }
 
 .close:hover,
@@ -31,6 +34,7 @@
 /* Modal Header */
 .modal-header {
   padding: 2px 16px;
+  margin-bottom: 2rem;
 }
 
 /* Modal Body */

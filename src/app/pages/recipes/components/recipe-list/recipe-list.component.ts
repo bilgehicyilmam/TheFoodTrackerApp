@@ -30,10 +30,11 @@ export class RecipeListComponent implements OnInit {
       }
       rows[counter].push(value[i]);
     }
-    this.recipeRows  = rows;
-    console.log(this.recipeRows);
+    this.recipeRows = rows;
+    this.recipesArray = value;
   }
 
+  public recipesArray: Recipe[];
 
   public recipeRows: Recipe[][];
 
