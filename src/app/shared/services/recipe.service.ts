@@ -21,4 +21,8 @@ export class RecipeService {
         return res.foods;
       }));
   }
+
+  createRecipe(recipe: any) {
+    return undefined;
+  }
 }

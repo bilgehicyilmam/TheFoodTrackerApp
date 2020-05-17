@@ -3,6 +3,7 @@ import { Observable, of } from 'rxjs';
 import { debounceTime, distinctUntilChanged, flatMap, map } from 'rxjs/operators';
 import { RecipeService } from '../../../../shared/services/recipe.service';
 import { Food } from '../../../../shared/models/food';
+import { UploadService } from '../../../../shared/services/upload.service';
 
 @Component({
   selector: 'app-create-recipe-modal',
@@ -13,7 +14,10 @@ export class CreateRecipeModalComponent implements OnInit {
   @Input() showModal: boolean;
   @Output() closed = new EventEmitter<void>();
 
-  public recipe: any = {};
+  public recipe: any = {
+    nutrients: {},
+    thumbUrl: ''
+  };
   public ingredientModel;
   public ingredientValue;
   public ingredients: Food[] = [];
@@ -24,7 +28,9 @@ export class CreateRecipeModalComponent implements OnInit {
 
   public objectKeys = Object.keys;
 
-  constructor(private recipeService: RecipeService) {
+  private recipePicture;
+
+  constructor(private recipeService: RecipeService, private uploadService: UploadService) {
   }
 
   ngOnInit(): void {
@@ -81,5 +87,16 @@ export class CreateRecipeModalComponent implements OnInit {
   onIngredientAmountChange(i: number, value: any) {
     this.ingredients[i].amount = value;
     this.calculateNutrientsForRecipe();
+  }
+
+  selectRecipePicture($event: any) {
+    this.recipePicture = $event.target.files[0];
+  }
+
+  formSubmitted() {
+    this.uploadService.uploadFile(this.recipePicture).pipe(flatMap(res => {
+      this.recipe.thumbUrl = res.Location;
+      return this.recipeService.createRecipe(this.recipe);
+    }));
   }
 }

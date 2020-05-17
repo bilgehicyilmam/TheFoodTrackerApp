@@ -7,13 +7,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { LimitPipe } from './pipes/limit.pipe';
 import { RecipeFilterPipe } from './pipes/recipe-filter.pipe';
 import { ModalComponent } from './components/modal/modal.component';
+import { UploadService } from './services/upload.service';
 
 
 @NgModule({
   imports: [RouterModule, HttpClientModule],
   exports: [OrderPipe, NavigationComponent, LimitPipe, RecipeFilterPipe, ModalComponent],
   declarations: [OrderPipe, NavigationComponent, LimitPipe, RecipeFilterPipe, ModalComponent],
-  providers: [RecipeService],
+  providers: [RecipeService, UploadService],
 })
 export class SharedModule {
 }
