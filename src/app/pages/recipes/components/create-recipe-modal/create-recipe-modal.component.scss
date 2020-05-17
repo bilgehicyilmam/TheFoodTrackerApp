@@ -1,36 +1,31 @@
-.form {
-  &__fieldset {
-    border: none;
-    margin: 0;
-    margin-inline-start: 0;
-    margin-inline-end: 0;
-  }
+.form-control {
+  font-size: 1.6rem;
+}
 
-  &__label {
-    display: block;
-    margin-bottom: 0.5rem;
-    width: 100%;
-    height: auto;
-    font-size: 1.6rem;
-  }
+.remove-ingredient {
+  position: absolute;
+  right: 1.6rem;
+  top: 1px;
+  cursor: pointer;
+  color: #aaa;
+  float: right;
+  font-size: 1.6rem;
+  font-weight: bold;
+}
 
-  &__input[type=text] {
-    width: 100%;
-    max-width: 100%;
-    transition: border linear .2s, box-shadow linear .2s;
-    padding: 8px 8px;
-    border: 1px solid #b0bec5;
-    border-radius: 2px;
-    font-size: 1.6rem;
+.increase-ingredient {
+  font-size: 1.2rem;
+  cursor: pointer;
+}
 
-    &:focus {
-      border: 1px solid #b0bec5 !important;
-      box-shadow: none;
-      outline: none;
-    }
-  }
+.selected-ingredient {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
 
-  &__file-input {
-    font-size: 1.6rem;
-  }
+.see-nutrient-details {
+  font-size: 1.2rem;
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
 }

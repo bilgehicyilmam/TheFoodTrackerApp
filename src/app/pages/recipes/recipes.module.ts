@@ -7,6 +7,7 @@ import { RecipeListComponent } from './components/recipe-list/recipe-list.compon
 import { RecipeFilterComponent } from './components/recipe-filter/recipe-filter.component';
 import { FormsModule } from '@angular/forms';
 import { CreateRecipeModalComponent } from './components/create-recipe-modal/create-recipe-modal.component';
+import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { CreateRecipeModalComponent } from './components/create-recipe-modal/cre
     CommonModule,
     SharedModule,
     RecipesRoutingModule,
-    FormsModule
+    FormsModule,
+    NgbTypeaheadModule
   ],
   exports: [RecipesComponent]
 })

@@ -28,10 +28,11 @@
               "src/assets"
             ],
             "stylePreprocessorOptions": {
-              "includePaths": ["./src/scss/base"]
+              "includePaths": [
+                "./src/scss/base"
+              ]
             },
             "styles": [
-              "./node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.scss"
             ],
             "scripts": [

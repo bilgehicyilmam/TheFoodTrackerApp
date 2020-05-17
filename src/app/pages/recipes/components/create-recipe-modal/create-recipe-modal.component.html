@@ -1,24 +1,73 @@
 <app-modal (closed)="closed.emit()" [showModal]="showModal" title="Create Recipe">
-  <form action="" class="form">
-    <div>
-      <label for="name" class="form__label">Name</label>
-      <input id="name" class="form__input" name="name" type="text" value="" autocapitalize="off" autocorrect="off">
+
+  <form action="">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" id="name" aria-describedby="emailHelp">
+      <!--      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
     </div>
-    <div class="mt-sm">
-      <label for="description" class="form__label">Description</label>
-      <input id="description" class="form__input" name="description" type="text" value="" autocapitalize="off"
-             autocorrect="off">
-    </div>
-    <div class="mt-sm">
-      <label for="file" class="form__label">Recipe image</label>
-      <input id="file" class="form__file-input" name="Nick" type="file" value="" autocapitalize="off" autocorrect="off">
-    </div>
-    <div class="mt-sm" style="text-align: right">
-      <button class="btn btn-success add-button mt-md" (click)="showModal = true">
-        Add recipe
-      </button>
+    <div class="form-group">
+      <label for="description">Description</label>
+      <input type="text" class="form-control" id="description">
     </div>
 
+
+    <div class="form-group">
+      <label for="ingredients">Search for an ingredient:</label>
+      <input id="typeahead-basic" type="text" class="form-control" id="ingredients"
+             [value]="ingredientValue"
+             [(ngModel)]="ingredientModel"
+             [ngModelOptions]="{standalone: true}"
+             [editable]='false'
+             [inputFormatter]="ingredientFormatter"
+             [resultFormatter]="ingredientFormatter"
+             (selectItem)="onIngredientModelChange($event)"
+             [ngbTypeahead]="ingredientSearch.bind(this)"/>
+
+      <div class="row selected-ingredient" *ngFor="let ingredient of ingredients; let i = index">
+        <div class="col-9">
+          {{ ingredient.description }} <span class="increase-ingredient"
+                                             (click)="increaseIngredient(i)">{{ingredient.times > 1 ? '* ' + ingredient.times : '+'}}</span>
+        </div>
+        <div class="col-3 " style="padding-right: 30px">
+          <select class="custom-select custom-select-sm" (change)="onIngredientAmountChange(i, $event.target.value)">
+            <option selected value="100">100g</option>
+            <option value="13.5">1 spoon (13.5g)</option>
+            <option value="1">1g</option>
+          </select>
+          <span class="remove-ingredient" (click)="removeIngredient(i)">x</span>
+        </div>
+      </div>
+
+
+      <div *ngIf="recipe.nutrients && recipe.nutrients['Energy']" class="row">
+        <div class="col-3">
+          Total calorie:
+        </div>
+        <div class="col-9">
+          {{recipe.nutrients['Energy'].amount | number}}
+        </div>
+        <div class="col-12">
+          <span class="see-nutrient-details" *ngIf="!showNutrientDetails" (click)="showNutrientDetails = true">See all details</span>
+        </div>
+      </div>
+
+      <div *ngIf="showNutrientDetails">
+        <div *ngFor="let nutrientKey of objectKeys(recipe.nutrients)">
+          <div class="row" *ngIf="nutrientKey !== 'Energy'">
+            <div class="col-3">{{nutrientKey}}:</div>
+            <div class="col-9">{{recipe.nutrients[nutrientKey].amount | number}}</div>
+          </div>
+        </div>
+        <div>
+          <span class="see-nutrient-details" *ngIf="showNutrientDetails" (click)="showNutrientDetails = false">Hide details</span>
+        </div>
+      </div>
+
+
+    </div>
+    <button type="submit" class="btn btn-primary" style="margin-top: 1rem;">Submit</button>
   </form>
 
 </app-modal>
+
