@@ -12,6 +12,10 @@ export interface Food {
     derivationCode: string;
     derivationDescription: string;
   }];
+  portions?: [{
+    portionDescription: string;
+    gramWeight: number;
+  }];
   times: number;
   amount: number;
 }

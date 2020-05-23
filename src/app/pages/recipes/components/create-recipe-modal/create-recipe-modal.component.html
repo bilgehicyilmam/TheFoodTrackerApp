@@ -32,8 +32,9 @@
         <div class="col-3 " style="padding-right: 30px">
           <select class="custom-select custom-select-sm" (change)="onIngredientAmountChange(i, $event.target.value)">
             <option selected value="100">100g</option>
-            <option value="13.5">1 spoon (13.5g)</option>
             <option value="1">1g</option>
+            <option [value]="portion['gramWeight']"
+                    *ngFor="let portion of ingredient['foodPortions']">{{ portion['portionDescription'] + ' (' + portion['gramWeight'] + 'g)' }}</option>
           </select>
           <span class="remove-ingredient" (click)="removeIngredient(i)">x</span>
         </div>

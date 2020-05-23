@@ -30,6 +30,8 @@ export class CreateRecipeModalComponent implements OnInit {
 
   private recipePicture;
 
+  public searchLoading = false;
+
   constructor(private recipeService: RecipeService, private uploadService: UploadService) {
   }
 
@@ -55,6 +57,10 @@ export class CreateRecipeModalComponent implements OnInit {
     this.ingredients.push(item);
     this.ingredientValue = '';
     this.calculateNutrientsForRecipe();
+    this.recipeService.getIngredientDetails(item.fdcId).subscribe(res => {
+      item.foodPortions = res;
+      console.log(item.foodPortions);
+    });
   }
 
   removeIngredient(index: number) {

@@ -8,11 +8,8 @@ import { RecipeService } from '../../shared/services/recipe.service';
   styleUrls: ['./recipes.component.scss']
 })
 export class RecipesComponent implements OnInit {
-
   recipes: Recipe[];
-
   filterByRecipeName: string;
-
   showModal: boolean;
 
   constructor(private recipeService: RecipeService) {

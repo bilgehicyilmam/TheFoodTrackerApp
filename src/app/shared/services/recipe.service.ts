@@ -25,4 +25,22 @@ export class RecipeService {
   createRecipe(recipe: any) {
     return undefined;
   }
+
+  getIngredientDetails(ingredientId): Observable<[{
+    portionDescription: string;
+    gramWeight: number;
+  }]> {
+    return this.http.get(`https://api.nal.usda.gov/fdc/v1/food/${ingredientId}?api_key=viXnz4QNJ7izL9DaLjZ3Trze26mu4OFagnX6Qq9d`)
+      .pipe(map((res: any) => {
+        const foodPortions = res.foodPortions || [];
+        if (res.servingSizeUnit && res.servingSize && res.householdServingFullText) {
+          const gramWeight = res.servingSizeUnit === 'g' ? res.servingSize : res.servingSize / 1000;
+          foodPortions.push({
+            gramWeight,
+            portionDescription: res.householdServingFullText
+          });
+        }
+        return foodPortions;
+      }));
+  }
 }
