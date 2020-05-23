@@ -1,18 +1,24 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Recipe } from '../models/recipe';
 import { map } from 'rxjs/operators';
 import { Food } from '../models/food';
+import { cloneDeep } from 'lodash';
 
 @Injectable()
 export class RecipeService {
+
+  private recipes: Recipe[] = [];
 
   constructor(private http: HttpClient) {
   }
 
   public getReservations(): Observable<Recipe[]> {
-    return this.http.get<Recipe[]>('assets/data/recipes.json');
+    return this.http.get<Recipe[]>('assets/data/recipes.json').pipe(map(recipes => {
+      this.recipes = recipes;
+      return recipes;
+    }));
   }
 
   public findIngredients(query: string): Observable<Food[]> {
@@ -22,8 +28,12 @@ export class RecipeService {
       }));
   }
 
-  createRecipe(recipe: any) {
-    return undefined;
+  createRecipe(recipe: any): Observable<any> {
+    const recipeCopy = cloneDeep(recipe);
+    console.log(JSON.stringify(recipeCopy));
+    this.modifyRecipeForCreation(recipeCopy);
+    this.recipes.push(recipeCopy);
+    return of(recipeCopy);
   }
 
   getIngredientDetails(ingredientId): Observable<[{
@@ -42,5 +52,9 @@ export class RecipeService {
         }
         return foodPortions;
       }));
+  }
+
+  private modifyRecipeForCreation(recipeCopy: Recipe) {
+    recipeCopy.id = this.recipes.length;
   }
 }

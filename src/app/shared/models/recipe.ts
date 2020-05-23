@@ -1,10 +1,11 @@
 export interface Recipe {
-  id: string;
+  id?: number;
   name: string;
   description: string;
-  thumbUrl: string;
-  rating: number;
-  numberOfComments: number;
-  createdBy: { name: string, thumb: string };
-  nutritionData: { [key: string]: string };
+  thumbUrl?: string;
+  createdBy?: {
+    name: string,
+    thumb: string
+  };
+  nutrients?: { [key: string]: { amount: number } };
 }

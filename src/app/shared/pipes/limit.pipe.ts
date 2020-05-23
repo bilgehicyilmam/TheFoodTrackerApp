@@ -10,5 +10,6 @@ export class LimitPipe implements PipeTransform {
     if (value && typeof value === 'string' && value.length > limit) {
       return value.substring(0, limit) + '...';
     }
+    return value;
   }
 }

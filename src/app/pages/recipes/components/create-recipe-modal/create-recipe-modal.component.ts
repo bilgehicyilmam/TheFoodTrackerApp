@@ -4,6 +4,7 @@ import { debounceTime, distinctUntilChanged, flatMap, map } from 'rxjs/operators
 import { RecipeService } from '../../../../shared/services/recipe.service';
 import { Food } from '../../../../shared/models/food';
 import { UploadService } from '../../../../shared/services/upload.service';
+import { Recipe } from '../../../../shared/models/recipe';
 
 @Component({
   selector: 'app-create-recipe-modal',
@@ -12,11 +13,13 @@ import { UploadService } from '../../../../shared/services/upload.service';
 })
 export class CreateRecipeModalComponent implements OnInit {
   @Input() showModal: boolean;
-  @Output() closed = new EventEmitter<void>();
+  @Output() closed = new EventEmitter<Recipe>();
 
-  public recipe: any = {
-    nutrients: {},
-    thumbUrl: ''
+  public recipe: Recipe = {
+    name: '',
+    description: '',
+    createdBy: null,
+    nutrients: {}
   };
   public ingredientModel;
   public ingredientValue;
@@ -24,13 +27,11 @@ export class CreateRecipeModalComponent implements OnInit {
 
   public showNutrientDetails: boolean;
 
-  public totalCalorie;
 
   public objectKeys = Object.keys;
 
-  private recipePicture;
 
-  public searchLoading = false;
+  private recipePicture;
 
   constructor(private recipeService: RecipeService, private uploadService: UploadService) {
   }
@@ -59,7 +60,6 @@ export class CreateRecipeModalComponent implements OnInit {
     this.calculateNutrientsForRecipe();
     this.recipeService.getIngredientDetails(item.fdcId).subscribe(res => {
       item.foodPortions = res;
-      console.log(item.foodPortions);
     });
   }
 
@@ -86,6 +86,7 @@ export class CreateRecipeModalComponent implements OnInit {
       }
 
     }
+    console.log(nutrients);
     this.recipe.nutrients = nutrients;
 
   }
@@ -100,9 +101,31 @@ export class CreateRecipeModalComponent implements OnInit {
   }
 
   formSubmitted() {
-    this.uploadService.uploadFile(this.recipePicture).pipe(flatMap(res => {
-      this.recipe.thumbUrl = res.Location;
-      return this.recipeService.createRecipe(this.recipe);
-    }));
+    if (!this.recipePicture) {
+      this.recipeService.createRecipe(this.recipe).subscribe(res => {
+        this.resetFormAndClose(res);
+      });
+    } else {
+      this.uploadService.uploadFile(this.recipePicture).pipe(flatMap(res => {
+        this.recipe.thumbUrl = res.Location;
+        return this.recipeService.createRecipe(this.recipe);
+      })).subscribe(res => {
+        this.resetFormAndClose(res);
+      });
+    }
+
+  }
+
+  private resetFormAndClose(recipe: Recipe): void {
+    this.recipe = {
+      name: '',
+      description: '',
+      createdBy: null,
+      nutrients: {}
+    };
+    this.ingredientModel = null;
+    this.ingredientValue = null;
+    this.ingredients = null;
+    this.closed.emit(recipe);
   }
 }
