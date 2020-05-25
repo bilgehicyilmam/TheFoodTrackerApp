@@ -27,9 +27,10 @@ export class UserService {
     return of(null);
   }
 
-  public register(name: string, email: string, password: string) {
-    const user = { id: this.users.length, name, email, password };
+  public register(user) {
+    user.id = this.users.length;
     this.users.push(user);
+    console.log(user);
     return of(cloneDeep(user));
   }
 

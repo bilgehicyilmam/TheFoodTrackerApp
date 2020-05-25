@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UserService } from './shared/services/user.service';
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   declarations: [
@@ -15,9 +16,13 @@ import { UserService } from './shared/services/user.service';
     BrowserModule,
     SharedModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyAiMyvBWawl776i3p-YAewXZZUwS_pku0U'
+    })
   ],
   bootstrap: [AppComponent],
   providers: [UserService]
 })
-export class AppModule { }
+export class AppModule {
+}
