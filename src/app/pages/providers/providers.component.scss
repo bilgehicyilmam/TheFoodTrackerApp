@@ -1,0 +1,51 @@
+.login-form {
+  font-size: 1.6rem;
+}
+
+.form-control {
+  font-size: 1.6rem !important;
+}
+
+.section-heading {
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: row;
+}
+
+.error {
+  color: red;
+}
+
+.register-link {
+  margin-left: 1rem;
+}
+
+.card-container {
+  text-align: center;
+  padding: 0 2rem;
+}
+
+.card {
+  background-color: #f7f8fa;
+  height: 50rem;
+  border: none;
+  border-radius: 5px;
+  text-align: left;
+  padding: 1.5rem;
+  font-size: 1.6rem;
+}
+
+.place {
+  display: flex;
+  background-color: #f7f8fa;
+  border: none;
+  border-radius: 5px;
+
+
+  &__img {
+    height: 100%;
+    width: 20rem;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+  }
+}

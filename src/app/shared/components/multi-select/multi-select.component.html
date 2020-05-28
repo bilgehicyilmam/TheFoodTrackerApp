@@ -1,0 +1,20 @@
+<div class="multiselect">
+    <div class="multiselect__box" (click)="toggleSelect(); $event.stopPropagation();">
+        <select name="" id="" class="multiselect__select">
+            <option value="">
+                {{ label }}
+            </option>
+        </select>
+        <div class="multiselect__over-select">
+        </div>
+    </div>
+    <div class="multiselect__checkbox-container" [class.multiselect--open]="open">
+        <div class="multiselect__item capitalized" *ngIf="options && !multiple" (click)="$event.stopPropagation();">
+            <input type="radio" name="radio" class="multiselect__checkbox" (change)="onRadioAll()" *ngIf="!multiple"> All
+        </div>
+        <div class="multiselect__item capitalized" *ngFor="let option of options" (click)="$event.stopPropagation();">
+            <input type="checkbox" class="multiselect__checkbox" (change)="onCheckChange(option, $event)" *ngIf="multiple">
+            <input type="radio" name="radio" class="multiselect__checkbox" (change)="onRadioChange(option)" *ngIf="!multiple"> {{option | lowercase }}
+        </div>
+    </div>
+</div>

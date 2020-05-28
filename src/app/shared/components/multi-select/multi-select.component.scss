@@ -1,0 +1,45 @@
+@import "_variables";
+
+.multiselect {
+  font-size: 1.6rem;
+  width: 14rem;
+  line-height: 1.6;
+  display: inline-block;
+
+  &__box {
+    position: relative;
+  }
+
+  &__select {
+    padding: 0.8rem 1.2rem;
+    width: 100%;
+    border: 1px $color-grey solid;
+  }
+
+  &__over-select {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+  }
+
+  &__checkbox-container {
+    display: none;
+    position: absolute;
+    width: 15rem;
+    border: 1px $color-grey solid;
+    background-color: $color-white;
+    z-index: 100;
+    text-align: left;
+
+  }
+
+  &__item {
+    padding: 0.1rem 1.6rem;
+  }
+
+  &--open {
+    display: block;
+  }
+}

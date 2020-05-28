@@ -1,0 +1,14 @@
+<div class="filter">
+  <div class="filter__dropdown-box">
+        <span class="filter__label">
+            Filter by:
+        </span>
+    <app-multi-select label="Status" [options]="statusOptions" (selectionChange)="onSelectionChange($event, 'tags')"
+                      class="mr-sm"></app-multi-select>
+  </div>
+  <div class="filter__search-box">
+    <input type="text" class="filter__search" [class.filter--loading]="searchLoading" [(ngModel)]="restaurant"
+           (ngModelChange)="onSearchChange(restaurant)"
+           placeholder="Search a restaurant">
+  </div>
+</div>
