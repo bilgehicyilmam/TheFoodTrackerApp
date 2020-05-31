@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 import { RegisterComponent } from './register.component';
 import { RegisterRoutingModule } from './register-routing.module';
+import { AgmCoreModule } from '@agm/core';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { RegisterRoutingModule } from './register-routing.module';
     SharedModule,
     RegisterRoutingModule,
     FormsModule,
-    NgbTypeaheadModule
+    NgbTypeaheadModule,
+    AgmCoreModule
   ],
   exports: [RegisterComponent]
 })

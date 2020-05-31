@@ -2,6 +2,9 @@ export interface Recipe {
   id?: number;
   name: string;
   description: string;
+  prepTime: number;
+  cookTime: number;
+  directions: string;
   thumbUrl?: string;
   createdBy?: {
     name: string,

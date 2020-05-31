@@ -2,16 +2,17 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { Recipe } from '../models/recipe';
-import { map } from 'rxjs/operators';
+import { flatMap, map } from 'rxjs/operators';
 import { Food } from '../models/food';
 import { cloneDeep } from 'lodash';
+import { UserService } from './user.service';
 
 @Injectable()
 export class RecipeService {
 
   private recipes: Recipe[] = [];
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private userService: UserService) {
   }
 
   public getReservations(): Observable<Recipe[]> {
@@ -29,11 +30,13 @@ export class RecipeService {
   }
 
   createRecipe(recipe: any): Observable<any> {
+    console.log(recipe);
     const recipeCopy = cloneDeep(recipe);
-    console.log(JSON.stringify(recipeCopy));
-    this.modifyRecipeForCreation(recipeCopy);
-    this.recipes.push(recipeCopy);
-    return of(recipeCopy);
+    return this.modifyRecipeForCreation(recipeCopy).pipe(flatMap(res => {
+      this.recipes.push(recipeCopy);
+      console.log(recipeCopy);
+      return of(recipeCopy);
+    }));
   }
 
   getIngredientDetails(ingredientId): Observable<[{
@@ -56,5 +59,12 @@ export class RecipeService {
 
   private modifyRecipeForCreation(recipeCopy: Recipe) {
     recipeCopy.id = this.recipes.length;
+    return this.userService.getAuthenticatedUser().pipe(map(res => {
+      const { name, thumb } = res;
+      recipeCopy.createdBy = {
+        name,
+        thumb
+      };
+    }));
   }
 }

@@ -18,6 +18,9 @@ export class CreateRecipeModalComponent implements OnInit {
   public recipe: Recipe = {
     name: '',
     description: '',
+    prepTime: null,
+    cookTime: null,
+    directions: '',
     createdBy: null,
     nutrients: {}
   };
@@ -117,15 +120,18 @@ export class CreateRecipeModalComponent implements OnInit {
   }
 
   private resetFormAndClose(recipe: Recipe): void {
+    this.closed.emit(recipe);
     this.recipe = {
       name: '',
       description: '',
+      prepTime: null,
+      cookTime: null,
+      directions: '',
       createdBy: null,
       nutrients: {}
     };
     this.ingredientModel = null;
     this.ingredientValue = null;
     this.ingredients = null;
-    this.closed.emit(recipe);
   }
 }
