@@ -22,7 +22,8 @@ export class CreateRecipeModalComponent implements OnInit {
     cookTime: null,
     directions: '',
     createdBy: null,
-    nutrients: {}
+    nutrients: {},
+    tags: []
   };
   public ingredientModel;
   public ingredientValue;
@@ -120,6 +121,7 @@ export class CreateRecipeModalComponent implements OnInit {
   }
 
   private resetFormAndClose(recipe: Recipe): void {
+    console.log(recipe)
     this.closed.emit(recipe);
     this.recipe = {
       name: '',
@@ -133,5 +135,15 @@ export class CreateRecipeModalComponent implements OnInit {
     this.ingredientModel = null;
     this.ingredientValue = null;
     this.ingredients = null;
+  }
+
+
+  onTagChange($event: any, tagValue: string) {
+    const value = $event.currentTarget.checked;
+    if (value) {
+      this.recipe.tags.push(tagValue);
+    } else {
+      this.recipe.tags = this.recipe.tags.filter(t => t !== tagValue);
+    }
   }
 }
