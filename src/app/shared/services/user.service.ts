@@ -1,41 +1,37 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { cloneDeep } from 'lodash';
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class UserService {
-  private users = [{
-    id: 0,
-    email: 'bilge.hicyilmam@boun.edu.tr',
-    name: 'Bilge Hicyilmam',
-    password: '123456',
-    isRestaurant: false
-  }];
 
   private currentUser = null;
 
-  constructor() {
+  private api = 'http://ec2-3-17-11-80.us-east-2.compute.amazonaws.com:8080/users';
+
+
+  constructor(private http: HttpClient) {
   }
 
   public login(email: string, password: string) {
-    for (let i = 0; i < this.users.length; i++) {
-      const user = this.users[i];
-      if (user.email === email && user.password === password) {
-        this.currentUser = user;
-        return of(user);
-      }
-    }
-    return of(null);
+    return this.http.post(this.api + '/login', { email, password }).pipe(map(res => {
+      this.currentUser = res;
+      return res;
+    }));
   }
 
   public register(user) {
-    user.id = this.users.length;
-    this.users.push(user);
-    return of(cloneDeep(user));
+    return this.http.post(this.api, user);
   }
 
   public getAuthenticatedUser(): Observable<{ name: string, thumb: string }> {
     return of(this.currentUser);
+  }
+
+  public getAuthenticatedUserSync(): Observable<{ name: string, thumb: string }> {
+    return this.currentUser;
   }
 
   public isAuthenticated(): boolean {
@@ -43,10 +39,14 @@ export class UserService {
   }
 
   getUsers() {
-    return of(this.users);
+    return this.http.get<any[]>(this.api).pipe(map(users => {
+      return users.filter(u => !u.isRestaurant);
+    }));
   }
 
   getProviders() {
-    return of(this.users.filter(u => u.isRestaurant));
+    return this.http.get<any[]>(this.api).pipe(map(users => {
+      return users.filter(u => u.isRestaurant);
+    }));
   }
 }

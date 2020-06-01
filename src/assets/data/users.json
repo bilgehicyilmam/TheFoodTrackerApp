@@ -1,0 +1,30 @@
+[
+  {
+    "name": "Bilge Hicyilmam",
+    "email": "bilge.hicyilmam@boun.edu.tr",
+    "password": "123456",
+    "thumb": "https://fpbhbounrecipepictures.s3.eu-central-1.amazonaws.com/recipe-pictures/Screenshot%202020-04-29%20at%2015.13.18.png",
+    "address": "Kadıköy/İstanbul, Türkiye",
+    "latitude": 40.98186700000001,
+    "longitude": 29.0576302,
+    "phoneNumber": "",
+    "website": "",
+    "details": "",
+    "isRestaurant": false,
+    "id": 1
+  },
+  {
+    "name": "My Chef",
+    "email": "mychef@gmail.com",
+    "password": "123123",
+    "thumb": "https://fpbhbounrecipepictures.s3.eu-central-1.amazonaws.com/recipe-pictures/Screenshot+2020-06-01+at+19.06.15.png",
+    "address": "Kadıköy/İstanbul, Türkiye",
+    "latitude": 40.98186700000001,
+    "longitude": 29.0576302,
+    "phoneNumber": "+90 216 330 45 87",
+    "website": "https://www.my-chef.com.tr/",
+    "details": "",
+    "isRestaurant": true,
+    "id": 1
+  }
+]

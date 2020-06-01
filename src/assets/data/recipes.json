@@ -11,6 +11,7 @@
       "name": "Uncle Ben's",
       "thumb": "https://images.media-allrecipes.com/userphotos/50x50/6514119.jpg"
     },
+    "tags": ["Vegan", "Vegetarian"],
     "nutrients": {
       "Calcium, Ca": {
         "amount": 28.000000000000004

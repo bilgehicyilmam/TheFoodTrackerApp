@@ -13,11 +13,13 @@ export class RecipeService {
 
   private recipes: Recipe[] = [];
 
+  private api = 'http://ec2-3-17-11-80.us-east-2.compute.amazonaws.com:8080/recipes';
+
   constructor(private http: HttpClient, private userService: UserService, private providerService: ProviderService) {
   }
 
-  public getReservations(): Observable<Recipe[]> {
-    return this.http.get<Recipe[]>('assets/data/recipes.json').pipe(map(recipes => {
+  public getRecipes(): Observable<Recipe[]> {
+    return this.http.get<Recipe[]>(this.api).pipe(map(recipes => {
       this.recipes = recipes;
       return recipes;
     }));
@@ -31,12 +33,11 @@ export class RecipeService {
   }
 
   createRecipe(recipe: any): Observable<any> {
-    console.log(recipe);
     const recipeCopy = cloneDeep(recipe);
     return this.modifyRecipeForCreation(recipeCopy).pipe(flatMap(res => {
-      this.recipes.push(recipeCopy);
-      console.log(recipeCopy);
-      return of(recipeCopy);
+      return this.http.post<Recipe>(this.api, recipeCopy).pipe(map(recipeResponse => {
+        this.recipes.push(recipeResponse);
+      }));
     }));
   }
 
@@ -59,7 +60,6 @@ export class RecipeService {
   }
 
   private modifyRecipeForCreation(recipeCopy: Recipe) {
-    recipeCopy.id = this.recipes.length;
     return this.userService.getAuthenticatedUser().pipe(map(res => {
 
       const { name, thumb } = res;

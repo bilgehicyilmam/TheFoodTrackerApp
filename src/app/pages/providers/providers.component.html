@@ -11,7 +11,18 @@
                alt="">
           <div style="height: 100%; padding: 2rem; text-align: left;">
             <h2>{{provider.name}}</h2>
-            <small style="font-size: 1.2rem;"> {{provider.location}}</small>
+            <div>
+              <small style="font-size: 1.2rem;"> {{provider.address}}</small>
+            </div>
+            <div *ngIf="provider.phoneNumber">
+              <small style="font-size: 1.2rem;"> {{provider.phoneNumber}}</small>
+            </div>
+            <div *ngIf="provider.website">
+              <small style="font-size: 1.2rem;"><a [href]="provider.website">{{provider.website}}</a></small>
+            </div>
+            <div>
+              <small style="font-size: 1.2rem;">{{provider.distance}} meters</small>
+            </div>
           </div>
         </div>
       </div>

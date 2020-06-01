@@ -49,6 +49,11 @@ export class RegisterComponent implements OnInit {
       if (userThumbRes) {
         this.user.thumb = userThumbRes.Location;
       }
+      // tslint:disable-next-line:no-string-literal
+      if (this.user.address && this.user.address['formatted_address']) {
+        // tslint:disable-next-line:no-string-literal
+        this.user.address = this.user.address['formatted_address'];
+      }
       return this.userService.register(this.user).pipe(flatMap(() => {
         return this.userService.login(this.user.email, this.user.password);
       }));
