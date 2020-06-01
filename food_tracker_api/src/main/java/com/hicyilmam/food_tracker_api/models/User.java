@@ -1,20 +1,20 @@
 package com.hicyilmam.food_tracker_api.models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import java.math.BigDecimal;
 import lombok.Data;
 
-@Entity
 @Data
 public class User {
-    @Id
-    @GeneratedValue
-    private Long id;
-    private String firstName;
-    private String lastName;
-    private String password;
-    @Column(unique = true)
+    private Integer id;
+    private String name;
     private String email;
+    private String password;
+    private String thumb;
+    private String address;
+    private BigDecimal latitude;
+    private BigDecimal longitude;
+    private String phoneNumber;
+    private String website;
+    private String details;
+    private boolean isRestaurant;
 }
