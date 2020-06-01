@@ -8,7 +8,8 @@ export class UserService {
     id: 0,
     email: 'bilge.hicyilmam@boun.edu.tr',
     name: 'Bilge Hicyilmam',
-    password: '123456'
+    password: '123456',
+    isRestaurant: false
   }];
 
   private currentUser = null;
@@ -30,7 +31,6 @@ export class UserService {
   public register(user) {
     user.id = this.users.length;
     this.users.push(user);
-    console.log(user);
     return of(cloneDeep(user));
   }
 
@@ -40,5 +40,13 @@ export class UserService {
 
   public isAuthenticated(): boolean {
     return this.currentUser !== null;
+  }
+
+  getUsers() {
+    return of(this.users);
+  }
+
+  getProviders() {
+    return of(this.users.filter(u => u.isRestaurant));
   }
 }

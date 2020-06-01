@@ -8,10 +8,11 @@ import { RecipeFilterComponent } from './components/recipe-filter/recipe-filter.
 import { FormsModule } from '@angular/forms';
 import { CreateRecipeModalComponent } from './components/create-recipe-modal/create-recipe-modal.component';
 import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
+import { RecipeDetailsModalComponent } from './components/recipe-details-modal/recipe-details-modal.component';
 
 
 @NgModule({
-  declarations: [RecipesComponent, RecipeListComponent, RecipeFilterComponent, CreateRecipeModalComponent],
+  declarations: [RecipesComponent, RecipeListComponent, RecipeFilterComponent, CreateRecipeModalComponent, RecipeDetailsModalComponent],
   imports: [
     CommonModule,
     SharedModule,

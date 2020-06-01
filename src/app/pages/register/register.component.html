@@ -19,22 +19,22 @@
     </div>
 
     <div class="form-group">
-      <label for="restaurantAddress">Your Address</label>
+      <label for="address">Your Address</label>
       <input type="text" class="form-control" id="address" name="address"
              placeholder="Istanbul, Turkiye"
-             (selectItem)="onUserAddressSelect($event)"
+             (selectItem)="onAddressSelect($event)"
              [(ngModel)]="user.address"
              [inputFormatter]="addressFormatter"
              [resultFormatter]="addressFormatter"
              [ngbTypeahead]="addressSearch.bind(this)"/>
     </div>
     <div class="form-group">
-      <label for="restaurantLatitude">Latitude</label>
+      <label for="latitude">Latitude</label>
       <input type="text" class="form-control" id="latitude" name="latitude"
              [(ngModel)]="user.latitude">
     </div>
     <div class="form-group">
-      <label for="restaurantLongitude">Longitude</label>
+      <label for="longitude">Longitude</label>
       <input type="text" class="form-control" id="longitude" name="longitude"
              [(ngModel)]="user.longitude">
     </div>
@@ -44,78 +44,19 @@
         [latitude]="user.latitude"
         [longitude]="user.longitude"
         [markerDraggable]="true"
-        (dragEnd)="restaurantMarkerDragged($event)">
+        (dragEnd)="markerDragged($event)">
       </agm-marker>
     </agm-map>
 
     <div class="form-group">
       <label for="userThumb">Choose a profile picture</label>
-      <input type="file" class="form-control-file" id="userThumb" (change)="onSelectUserThumb($event)">
+      <input type="file" class="form-control-file" id="userThumb" (change)="onSelectThumb($event)">
     </div>
 
     <div>
-      <a href="#" (click)="$event.preventDefault(); isCreateRestaurant = true;" *ngIf="!isCreateRestaurant">Create a
-        restaurant owner account</a>
-      <a href="#" (click)="$event.preventDefault(); isCreateRestaurant = false;" *ngIf="isCreateRestaurant">Hide
-        restaurant details</a>
-    </div>
-
-
-    <div *ngIf="isCreateRestaurant">
-      <div class="form-group">
-        <label for="restaurantName">Restaurant Name</label>
-        <input type="text" class="form-control" id="restaurantName" name="restaurantName"
-               [(ngModel)]="restaurant.name">
-      </div>
-      <div class="form-group">
-        <label for="restaurantWebsite">Restaurant Website URL</label>
-        <input type="text" class="form-control" id="restaurantWebsite" name="restaurantWebsite"
-               [(ngModel)]="restaurant.website">
-      </div>
-      <div class="form-group">
-        <label for="phoneNumber">Restaurant Phone Number</label>
-        <input type="text" class="form-control" id="phoneNumber" name="phoneNumber"
-               [(ngModel)]="restaurant.phoneNumber">
-      </div>
-      <div class="form-group">
-        <label for="restaurantDetails">Restaurant Details</label>
-        <textarea class="form-control" name="restaurantDetails" id="restaurantDetails" rows="5"
-                  [(ngModel)]="restaurant.details"></textarea>
-      </div>
-
-      <div class="form-group">
-        <label for="restaurantAddress">Address</label>
-        <input type="text" class="form-control" id="restaurantAddress" name="restaurantAddress"
-               placeholder="Istanbul, Turkiye"
-               (selectItem)="onAddressSelect($event)"
-               [(ngModel)]="restaurant.address"
-               [inputFormatter]="addressFormatter"
-               [resultFormatter]="addressFormatter"
-               [ngbTypeahead]="addressSearch.bind(this)"/>
-      </div>
-      <div class="form-group">
-        <label for="restaurantLatitude">Latitude</label>
-        <input type="text" class="form-control" id="restaurantLatitude" name="restaurantLatitude"
-               [(ngModel)]="restaurant.latitude">
-      </div>
-      <div class="form-group">
-        <label for="restaurantLongitude">Longitude</label>
-        <input type="text" class="form-control" id="restaurantLongitude" name="restaurantLongitude"
-               [(ngModel)]="restaurant.longitude">
-      </div>
-      <agm-map [latitude]="restaurant.latitude" [longitude]="restaurant.longitude">
-        <agm-marker
-          [latitude]="restaurant.latitude"
-          [longitude]="restaurant.longitude"
-          [markerDraggable]="true"
-          (dragEnd)="restaurantMarkerDragged($event)">
-        </agm-marker>
-      </agm-map>
-
-      <div class="form-group">
-        <label for="restaurantThumb">Choose restaurant picture</label>
-        <input type="file" class="form-control-file" id="restaurantThumb" (change)="onSelectRestaurantThumb($event)">
-      </div>
+      <a href="#" (click)="$event.preventDefault(); user.isRestaurant = true;" *ngIf="!user.isRestaurant">This is a
+        restaurant account</a>
+      <a href="#" (click)="$event.preventDefault(); user.isRestaurant = false;" *ngIf="user.isRestaurant">Create user account</a>
     </div>
     <button type="submit" class="btn btn-primary" style="margin-top: 1rem;">Submit</button>
     <a [routerLink]="'/login'" class="login-link">Login</a>

@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { cloneDeep } from 'lodash';
+import { UserService } from './user.service';
 
 @Injectable()
 export class ProviderService {
@@ -19,18 +20,18 @@ export class ProviderService {
       thumb: null,
       address: '',
       latitude: 0,
-      longitude: 0
+      longitude: 0,
+      userId: 0
     }
   ];
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient, private userService: UserService) {
   }
 
   public getProviders(filter: { [p: string]: string[] | string }): Observable<any> {
-    return of(this.providers).pipe(
+    return this.userService.getProviders().pipe(
       map(res => this.filterRestaurants(res, filter))
     );
-
   }
 
   private filterRestaurants(res, filter) {

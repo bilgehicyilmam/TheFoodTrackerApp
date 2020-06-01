@@ -4,9 +4,56 @@
     "name": "Spanish-Style Chicken and Rice",
     "description": "In this easy recipe for entertaining, crispy-skin chicken thighs roast atop a heady combo of Spanish-style rice emboldened with smoked paprika and mixed with earthy curly kale and sweet yellow bell peppers. Serve with a simple tossed salad to complete the meal",
     "thumbUrl": "https://images.media-allrecipes.com/userphotos/300x300/6533566.jpg",
+    "directions": "Heat the oven\nPut tray into oven\nWait till you smell something burned\nYour food should be ready but burned.",
+    "prepTime": 15,
+    "cookTime": 30,
     "createdBy": {
       "name": "Uncle Ben's",
       "thumb": "https://images.media-allrecipes.com/userphotos/50x50/6514119.jpg"
+    },
+    "nutrients": {
+      "Calcium, Ca": {
+        "amount": 28.000000000000004
+      },
+      "Iron, Fe": {
+        "amount": 1.8799999999999997
+      },
+      "Vitamin A, IU": {
+        "amount": 69
+      },
+      "Vitamin C, total ascorbic acid": {
+        "amount": 2.5
+      },
+      "Cholesterol": {
+        "amount": 0
+      },
+      "Fatty acids, total saturated": {
+        "amount": 0
+      },
+      "Protein": {
+        "amount": 3.47
+      },
+      "Total lipid (fat)": {
+        "amount": 2.43
+      },
+      "Carbohydrate, by difference": {
+        "amount": 26.39
+      },
+      "Energy": {
+        "amount": 139
+      },
+      "Sugars, total including NLEA": {
+        "amount": 1.39
+      },
+      "Fiber, total dietary": {
+        "amount": 1.4
+      },
+      "Sodium, Na": {
+        "amount": 465.00000000000006
+      },
+      "Fatty acids, total trans": {
+        "amount": 0
+      }
     }
   },
   {

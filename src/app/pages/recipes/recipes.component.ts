@@ -10,7 +10,8 @@ import { RecipeService } from '../../shared/services/recipe.service';
 export class RecipesComponent implements OnInit {
   recipes: Recipe[];
   filterByRecipeName: string;
-  showModal: boolean;
+  showRecipeCreateModal: boolean;
+  recipeDetails: Recipe;
 
   constructor(private recipeService: RecipeService) {
   }
@@ -23,5 +24,9 @@ export class RecipesComponent implements OnInit {
 
   onSearched(filterName: string) {
     this.filterByRecipeName = filterName;
+  }
+
+  onRecipeSelected($event: Recipe) {
+    this.recipeDetails = $event;
   }
 }

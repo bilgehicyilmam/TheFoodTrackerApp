@@ -2,7 +2,7 @@
   <h1 class="heading-primary">
     Recipes
   </h1>
-  <button class="btn btn-primary add-button" (click)="showModal = true">
+  <button class="btn btn-primary add-button" (click)="showRecipeCreateModal = true">
     Add recipe
   </button>
 </section>
@@ -10,7 +10,11 @@
   <app-recipe-filter (searched)="onSearched($event)"></app-recipe-filter>
 </section>
 <section class="section-list">
-  <app-recipe-list [recipes]="recipes | recipefilter: filterByRecipeName"></app-recipe-list>
+  <app-recipe-list [recipes]="recipes | recipefilter: filterByRecipeName"
+                   (recipeSelected)="recipeDetails = $event"></app-recipe-list>
 </section>
 
-<app-create-recipe-modal [showModal]="showModal" (closed)="showModal = false"></app-create-recipe-modal>
+<app-create-recipe-modal [showModal]="showRecipeCreateModal"
+                         (closed)="showRecipeCreateModal = false"></app-create-recipe-modal>
+<app-recipe-details-modal [showModal]="!!recipeDetails" [recipeDetails]="recipeDetails"
+                          (closed)="recipeDetails = null"></app-recipe-details-modal>

@@ -6,13 +6,14 @@ import { flatMap, map } from 'rxjs/operators';
 import { Food } from '../models/food';
 import { cloneDeep } from 'lodash';
 import { UserService } from './user.service';
+import { ProviderService } from './provider.service';
 
 @Injectable()
 export class RecipeService {
 
   private recipes: Recipe[] = [];
 
-  constructor(private http: HttpClient, private userService: UserService) {
+  constructor(private http: HttpClient, private userService: UserService, private providerService: ProviderService) {
   }
 
   public getReservations(): Observable<Recipe[]> {
@@ -60,6 +61,7 @@ export class RecipeService {
   private modifyRecipeForCreation(recipeCopy: Recipe) {
     recipeCopy.id = this.recipes.length;
     return this.userService.getAuthenticatedUser().pipe(map(res => {
+
       const { name, thumb } = res;
       recipeCopy.createdBy = {
         name,
