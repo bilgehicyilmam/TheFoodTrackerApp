@@ -13,7 +13,6 @@ import { MultiSelectComponent } from './components/multi-select/multi-select.com
 import { LowercasePipe } from './pipes/lowercase.pipe';
 import { CommonModule } from '@angular/common';
 import { ProviderService } from './services/provider.service';
-import { MapsService } from './services/maps.service';
 
 
 @NgModule({
