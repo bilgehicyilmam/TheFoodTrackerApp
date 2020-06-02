@@ -7,7 +7,7 @@ const routes: Routes = [
   {
     path: 'recipes',
     loadChildren: () => import('src/app/pages/recipes/recipes.module').then(m => m.RecipesModule),
-    // canActivate: [AuthGuardService]
+    canActivate: [AuthGuardService]
   },
   {
     path: 'login',
@@ -19,7 +19,8 @@ const routes: Routes = [
   },
   {
     path: 'providers',
-    loadChildren: () => import('src/app/pages/providers/providers.module').then(m => m.ProvidersModule)
+    loadChildren: () => import('src/app/pages/providers/providers.module').then(m => m.ProvidersModule),
+    canActivate: [AuthGuardService]
   }
 ];
 

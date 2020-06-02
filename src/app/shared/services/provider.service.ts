@@ -1,29 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { cloneDeep } from 'lodash';
 import { UserService } from './user.service';
 
 @Injectable()
 export class ProviderService {
-
-  private providers = [
-    {
-      id: 0,
-      name: 'The Bird',
-      location: 'Prenzlauer Berg',
-      tags: ['Vegan'],
-      website: '',
-      phoneNumber: '',
-      details: '',
-      thumb: null,
-      address: '',
-      latitude: 0,
-      longitude: 0,
-      userId: 0
-    }
-  ];
 
   constructor(private httpClient: HttpClient, private userService: UserService) {
   }
@@ -75,12 +57,5 @@ export class ProviderService {
       });
     }
     return restaurants;
-  }
-
-  createProvider(provider): Observable<any> {
-    provider.id = this.providers.length;
-    this.providers.push(cloneDeep(provider));
-    console.log(provider);
-    return of(provider);
   }
 }

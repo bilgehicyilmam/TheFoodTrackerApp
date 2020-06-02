@@ -41,10 +41,12 @@ export class ProvidersComponent implements OnInit {
 
   getProviders(filter = {}) {
     this.providers$ = this.providerService.getProviders(filter).pipe(map(providers => {
-      providers.forEach(p => {
-        p.distance = this.getDistance(p, this.userService.getAuthenticatedUserSync());
-      });
-      providers.sort((a, b) => a.distance - b.distance);
+      if (this.userService.getAuthenticatedUser()) {
+        providers.forEach(p => {
+          p.distance = this.getDistance(p, this.userService.getAuthenticatedUserSync());
+        });
+        providers.sort((a, b) => a.distance - b.distance);
+      }
       return providers;
     }));
   }

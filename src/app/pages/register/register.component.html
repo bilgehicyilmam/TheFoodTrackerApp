@@ -54,9 +54,9 @@
     </div>
 
     <div>
-      <a href="#" (click)="$event.preventDefault(); user.isRestaurant = true;" *ngIf="!user.isRestaurant">This is a
+      <a href="#" (click)="$event.preventDefault(); user.restaurant = true;" *ngIf="!user.restaurant">This is a
         restaurant account</a>
-      <a href="#" (click)="$event.preventDefault(); user.isRestaurant = false;" *ngIf="user.isRestaurant">Create user account</a>
+      <a href="#" (click)="$event.preventDefault(); user.restaurant = false;" *ngIf="user.restaurant">Create user account</a>
     </div>
     <button type="submit" class="btn btn-primary" style="margin-top: 1rem;">Submit</button>
     <a [routerLink]="'/login'" class="login-link">Login</a>

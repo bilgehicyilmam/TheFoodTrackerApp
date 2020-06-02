@@ -26,7 +26,7 @@ export class RegisterComponent implements OnInit {
     phoneNumber: '',
     website: '',
     details: '',
-    isRestaurant: false
+    restaurant: false
   };
 
   private userPicture: any;
