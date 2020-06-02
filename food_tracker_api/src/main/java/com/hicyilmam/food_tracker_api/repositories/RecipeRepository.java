@@ -30,4 +30,17 @@ public class RecipeRepository {
     public List<Recipe> findAll() {
         return recipes;
     }
+
+    public Recipe findOne(final Integer id) {
+        for (Recipe recipe : recipes) {
+            if (id.equals(recipe.getId())) {
+                return recipe;
+            }
+        }
+        return null;
+    }
+
+    public void removeAll() {
+        this.recipes = new ArrayList<>();
+    }
 }

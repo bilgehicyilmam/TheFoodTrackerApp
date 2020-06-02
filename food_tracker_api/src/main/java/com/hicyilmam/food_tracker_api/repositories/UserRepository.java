@@ -63,4 +63,8 @@ public class UserRepository {
         }
         return false;
     }
+
+    public void removeAll() {
+        this.users = new ArrayList<>();
+    }
 }
