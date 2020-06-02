@@ -1,6 +1,7 @@
 package com.hicyilmam.food_tracker_api.models;
 
 import java.math.BigDecimal;
+import java.util.List;
 import lombok.Data;
 
 @Data
@@ -16,5 +17,6 @@ public class User {
     private String phoneNumber;
     private String website;
     private String details;
-    private boolean isRestaurant;
+    private boolean restaurant;
+    private List<String> tags;
 }

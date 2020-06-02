@@ -18,7 +18,8 @@ public class Recipe {
     private List<String> tags;
 
     @Data
-    static class CreatedBy {
+    public static class CreatedBy {
+        private Integer id;
         private String name;
         private String thumb;
     }
