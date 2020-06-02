@@ -4,7 +4,7 @@
       <app-provider-filter (filterChange)="onFilterChange($event)"></app-provider-filter>
     </div>
     <div class="row">
-      <div class="col-6" *ngFor="let provider of providers$ | async">
+      <div class="col-6" style="margin-bottom: 3rem;" *ngFor="let provider of providers$ | async">
         <div class="place">
           <img class="place__img"
                [src]="provider.thumb"

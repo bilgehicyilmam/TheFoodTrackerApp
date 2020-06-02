@@ -23,6 +23,7 @@ export class CreateRecipeModalComponent implements OnInit {
     directions: '',
     createdBy: null,
     nutrients: {},
+    ingredients: [],
     tags: []
   };
   public ingredientModel;
@@ -60,6 +61,7 @@ export class CreateRecipeModalComponent implements OnInit {
     item.times = 1;
     item.amount = 100;
     this.ingredients.push(item);
+    console.log(this.ingredients);
     this.ingredientValue = '';
     this.calculateNutrientsForRecipe();
     this.recipeService.getIngredientDetails(item.fdcId).subscribe(res => {
@@ -105,6 +107,9 @@ export class CreateRecipeModalComponent implements OnInit {
   }
 
   formSubmitted() {
+    if (this.ingredients) {
+      this.recipe.ingredients = this.ingredients.map(i => i.description);
+    }
     if (!this.recipePicture) {
       this.recipeService.createRecipe(this.recipe).subscribe(res => {
         this.resetFormAndClose(res);
@@ -121,7 +126,6 @@ export class CreateRecipeModalComponent implements OnInit {
   }
 
   private resetFormAndClose(recipe: Recipe): void {
-    console.log(recipe)
     this.closed.emit(recipe);
     this.recipe = {
       name: '',
@@ -130,7 +134,8 @@ export class CreateRecipeModalComponent implements OnInit {
       cookTime: null,
       directions: '',
       createdBy: null,
-      nutrients: {}
+      nutrients: {},
+      ingredients: []
     };
     this.ingredientModel = null;
     this.ingredientValue = null;

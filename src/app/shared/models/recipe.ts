@@ -11,6 +11,7 @@ export interface Recipe {
     name: string;
     thumb: string;
   };
+  ingredients: string[];
   nutrients?: { [key: string]: { amount: number } };
   tags?: string[];
 }
