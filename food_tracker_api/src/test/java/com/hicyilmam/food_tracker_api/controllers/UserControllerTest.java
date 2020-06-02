@@ -19,7 +19,7 @@ class UserControllerTest extends FoodTrackerApiApplicationTests {
 
     @Autowired
     private UserRepository userRepository;
-    
+
     @Autowired
     private RecipeRepository recipeRepository;
 
