@@ -1,9 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuardService } from './shared/services/auth-guard.service';
+import {RecipesComponent} from "./pages/recipes/recipes.component";
 
 
 const routes: Routes = [
+
+  { path: '',component:RecipesComponent },
+
   {
     path: 'recipes',
     loadChildren: () => import('src/app/pages/recipes/recipes.module').then(m => m.RecipesModule),

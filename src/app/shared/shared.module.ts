@@ -10,7 +10,7 @@ import { ModalComponent } from './components/modal/modal.component';
 import { UploadService } from './services/upload.service';
 import { AuthGuardService } from './services/auth-guard.service';
 import { MultiSelectComponent } from './components/multi-select/multi-select.component';
-import { LowercasePipe } from './pipes/lowercase.pipe';
+
 import { CommonModule } from '@angular/common';
 import { ProviderService } from './services/provider.service';
 
@@ -18,7 +18,7 @@ import { ProviderService } from './services/provider.service';
 @NgModule({
   imports: [RouterModule, HttpClientModule, CommonModule],
   exports: [OrderPipe, NavigationComponent, LimitPipe, RecipeFilterPipe, ModalComponent, MultiSelectComponent],
-  declarations: [OrderPipe, NavigationComponent, LimitPipe, RecipeFilterPipe, ModalComponent, MultiSelectComponent, LowercasePipe],
+  declarations: [OrderPipe, NavigationComponent, LimitPipe, RecipeFilterPipe, ModalComponent, MultiSelectComponent],
   providers: [RecipeService, UploadService, AuthGuardService, ProviderService],
 })
 export class SharedModule {
