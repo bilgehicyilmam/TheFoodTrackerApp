@@ -11,7 +11,7 @@ const routes: Routes = [
   {
     path: 'recipes',
     loadChildren: () => import('src/app/pages/recipes/recipes.module').then(m => m.RecipesModule),
-    canActivate: [AuthGuardService]
+    // canActivate: [AuthGuardService]
   },
   {
     path: 'login',
