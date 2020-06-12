@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable, Output } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { cloneDeep } from 'lodash';
 import { HttpClient } from '@angular/common/http';
@@ -6,6 +6,8 @@ import { map } from 'rxjs/operators';
 
 @Injectable()
 export class UserService {
+
+  @Output() loggedIn: EventEmitter<boolean> = new EventEmitter();
 
   private currentUser = null;
 
@@ -19,6 +21,7 @@ export class UserService {
   public login(email: string, password: string) {
     return this.http.post(this.api + '/login', { email, password }).pipe(map(res => {
       this.currentUser = res;
+      this.loggedIn.emit(true);
       return res;
     }));
   }
