@@ -2,7 +2,7 @@
   <nav>
     <div>
       <div *ngIf="isLoggedIn">
-        <a class="float-right logout mr-2">Logout</a>
+        <a (click)="logout()" [routerLink]="'/login'" class="float-right logout mr-2">Logout</a>
         <a [routerLink]="'/'" class="float-right userdetails mr-2">
           {{username}}
         </a>

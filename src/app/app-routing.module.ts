@@ -7,6 +7,11 @@ import {RecipesComponent} from "./pages/recipes/recipes.component";
 const routes: Routes = [
 
   { path: '',component:RecipesComponent },
+  {
+    path: 'userprofile',
+    loadChildren: () => import('src/app/pages/userprofile/userprofile.module').then(m => m.UserProfileModule),
+    canActivate: [AuthGuardService]
+  },
 
   {
     path: 'recipes',

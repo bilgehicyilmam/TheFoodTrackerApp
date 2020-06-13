@@ -19,4 +19,10 @@ export class HeaderComponent implements OnInit {
     this.userService.username.subscribe((data: String) => this.username = data);
   }
 
+  logout(){
+    this.userService.logout();
+    this.isLoggedIn=false;
+    this.router.navigateByUrl('login')
+  }
+
 }

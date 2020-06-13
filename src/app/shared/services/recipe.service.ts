@@ -13,7 +13,7 @@ export class RecipeService {
 
   private recipes: Recipe[] = [];
 
-  private api = 'http://ec2-3-17-205-119.us-east-2.compute.amazonaws.com:8080/recipes';
+  private api = 'http://ec2-3-134-80-99.us-east-2.compute.amazonaws.com:8080/recipes';
   // private api = 'http://localhost:8080/recipes';
 
   constructor(private http: HttpClient, private userService: UserService, private providerService: ProviderService) {

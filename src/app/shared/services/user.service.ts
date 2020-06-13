@@ -12,7 +12,7 @@ export class UserService {
 
   private currentUser = null;
 
-  private api = 'http://ec2-3-17-205-119.us-east-2.compute.amazonaws.com:8080/users';
+  private api = 'http://ec2-3-134-80-99.us-east-2.compute.amazonaws.com:8080/users';
   // private api = 'http://localhost:8080/users';
 
 
@@ -54,5 +54,9 @@ export class UserService {
     return this.http.get<any[]>(this.api).pipe(map(users => {
       return users.filter(u => u.restaurant);
     }));
+  }
+
+  logout(){
+    this.currentUser=null;
   }
 }
