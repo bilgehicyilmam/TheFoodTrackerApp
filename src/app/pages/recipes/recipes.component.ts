@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Recipe } from '../../shared/models/recipe';
 import { RecipeService } from '../../shared/services/recipe.service';
+import { UserService } from "../../shared/services/user.service";
 
 @Component({
   selector: 'app-recipes',
@@ -13,13 +14,12 @@ export class RecipesComponent implements OnInit {
   showRecipeCreateModal: boolean;
   recipeDetails: Recipe;
 
-  constructor(private recipeService: RecipeService) {
+
+  constructor(private userService: UserService, private recipeService: RecipeService) {
   }
 
   ngOnInit(): void {
-    this.recipeService.getRecipes().subscribe(res => {
-      this.recipes = res;
-    });
+    this.recipeService.getRecipes().subscribe(res => {this.recipes = res; });
   }
 
   onSearched(filterName: string) {

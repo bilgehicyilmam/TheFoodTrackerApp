@@ -2,9 +2,11 @@
   <h1 class="heading-primary">
     Recipes
   </h1>
-  <button class="btn btn-primary add-button" (click)="showRecipeCreateModal = true">
-    Add recipe
-  </button>
+  <div>
+    <button style="position: absolute; right: 0; margin-right: 4.5rem" class="btn btn-primary add-button" (click)="showRecipeCreateModal = true">
+      Add recipe
+    </button>
+  </div>
 </section>
 <section class="section-filter">
   <app-recipe-filter (searched)="onSearched($event)"></app-recipe-filter>

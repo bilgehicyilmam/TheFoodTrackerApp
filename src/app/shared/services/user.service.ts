@@ -8,10 +8,11 @@ import { map } from 'rxjs/operators';
 export class UserService {
 
   @Output() loggedIn: EventEmitter<boolean> = new EventEmitter();
+  @Output() username: EventEmitter<boolean> = new EventEmitter();
 
   private currentUser = null;
 
-  private api = 'http://ec2-3-17-11-80.us-east-2.compute.amazonaws.com:8080/users';
+  private api = 'http://ec2-3-17-205-119.us-east-2.compute.amazonaws.com:8080/users';
   // private api = 'http://localhost:8080/users';
 
 
@@ -22,6 +23,7 @@ export class UserService {
     return this.http.post(this.api + '/login', { email, password }).pipe(map(res => {
       this.currentUser = res;
       this.loggedIn.emit(true);
+      this.username.emit(this.currentUser.name);
       return res;
     }));
   }
