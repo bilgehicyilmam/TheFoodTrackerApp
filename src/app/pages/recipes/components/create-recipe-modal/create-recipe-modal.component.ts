@@ -5,6 +5,7 @@ import { RecipeService } from '../../../../shared/services/recipe.service';
 import { Food } from '../../../../shared/models/food';
 import { UploadService } from '../../../../shared/services/upload.service';
 import { Recipe } from '../../../../shared/models/recipe';
+import {isInteger} from "@ng-bootstrap/ng-bootstrap/util/util";
 
 @Component({
   selector: 'app-create-recipe-modal',
@@ -16,6 +17,7 @@ export class CreateRecipeModalComponent implements OnInit {
   @Output() closed = new EventEmitter<Recipe>();
 
   public recipe: Recipe = {
+    portionsize: null,
     name: '',
     description: '',
     prepTime: null,
@@ -25,6 +27,7 @@ export class CreateRecipeModalComponent implements OnInit {
     nutrients: {},
     ingredients: [],
     tags: []
+
   };
   public ingredientModel;
   public ingredientValue;
@@ -128,6 +131,7 @@ export class CreateRecipeModalComponent implements OnInit {
   private resetFormAndClose(recipe: Recipe): void {
     this.closed.emit(recipe);
     this.recipe = {
+      portionsize: null,
       name: '',
       description: '',
       prepTime: null,
@@ -135,7 +139,8 @@ export class CreateRecipeModalComponent implements OnInit {
       directions: '',
       createdBy: null,
       nutrients: {},
-      ingredients: []
+      ingredients: [],
+
     };
     this.ingredientModel = null;
     this.ingredientValue = null;

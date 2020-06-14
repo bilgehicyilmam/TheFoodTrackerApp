@@ -9,13 +9,16 @@
   cursor: pointer;
   color: #aaa;
   float: right;
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   font-weight: bold;
+  color: darkred;
 }
 
 .increase-ingredient {
-  font-size: 1.2rem;
+  font-size: 1.8rem;
   cursor: pointer;
+  font-weight: bold;
+  color: darkred;
 }
 
 .selected-ingredient {
@@ -24,8 +27,9 @@
 }
 
 .see-nutrient-details {
-  font-size: 1.2rem;
-  color: blue;
+  font-size: 1.8rem;
+  color: darkred;
   text-decoration: underline;
   cursor: pointer;
+
 }
