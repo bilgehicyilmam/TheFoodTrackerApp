@@ -3,7 +3,7 @@
     Recipes
   </h1>
   <div>
-    <button style="position: absolute; right: 0; margin-right: 4.5rem" class="btn btn-primary add-button" (click)="showRecipeCreateModal = true">
+    <button style="position: absolute; right: 0; margin-right: 4.5rem" class="btn btn-primary add-button" (click)="showRecipeCreateModal = true" *ngIf="userService.getAuthenticatedUser() | async">
       Add recipe
     </button>
   </div>
