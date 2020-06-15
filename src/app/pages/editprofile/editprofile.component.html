@@ -1,0 +1,106 @@
+<form #form="ngForm" (ngSubmit)="formSubmitted()">
+  <section class="register-form">
+    <div class="container">
+      <h1>Edit Profile</h1>
+      <hr>
+      <div class="row">
+        <div class="col-md-3">
+          <div>
+            <img src="//placehold.it/100" width="250" class="avatar img-circle" alt="avatar">
+            <label>Upload a different photo</label>
+            <input type="file">
+          </div>
+        </div>
+
+
+        <div class="col-md-9 personal-info">
+          <h2>Personal information</h2>
+          <br>
+
+          <form class="form-horizontal" role="form">
+            <div class="form-group">
+              <label for="name" class="control-label">Name</label>
+              <div>
+                <input class="form-control" type="text" id="name" name="name" [(ngModel)]="user.name">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="email" class="control-label">Email</label>
+              <div>
+                <input class="form-control" type="text" id="email" name="email" [(ngModel)]="user.email">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="address">Your Address</label>
+              <input type="text" class="form-control" id="address" name="address"
+                     (selectItem)="onAddressSelect($event)"
+                     [(ngModel)]="user.address"
+                     [inputFormatter]="addressFormatter"
+                     [resultFormatter]="addressFormatter"
+                     [ngbTypeahead]="addressSearch.bind(this)"/>
+
+            </div>
+
+            <label>Choose food preferences</label>
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="vegan" (change)="onTagChange($event, 'Vegan')">
+              <label class="form-check-label" for="vegan" style="margin-left: 0.8rem;">Vegan</label>
+            </div>
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="Vegetarian" (change)="onTagChange($event, 'Vegetarian')">
+              <label class="form-check-label" for="Vegetarian" style="margin-left: 0.8rem;">Vegetarian</label>
+            </div>
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="Gluten-free" (change)="onTagChange($event, 'Gluten-free')">
+              <label class="form-check-label" for="Gluten-free" style="margin-left: 0.8rem;">Gluten Free</label>
+            </div>
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="LactoseFree" (change)="onTagChange($event, 'Lactose Free')">
+              <label class="form-check-label" for="LactoseFree" style="margin-left: 0.8rem;">Lactose Free</label>
+            </div>
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="SugarFree" (change)="onTagChange($event, 'Sugar Free')">
+              <label class="form-check-label" for="SugarFree" style="margin-left: 0.8rem;">Sugar Free</label>
+            </div>
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="LowSalt" (change)="onTagChange($event, 'Low Salt')">
+              <label class="form-check-label" for="LowSalt" style="margin-left: 0.8rem;">Low Salt</label>
+            </div>
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="Diabetic" (change)="onTagChange($event, 'Diabetic')">
+              <label class="form-check-label" for="Diabetic" style="margin-left: 0.8rem;">Diabetic</label>
+            </div>
+            <br>
+            <div class="form-group">
+              <label for="password" class="control-label">Specify foods that you are allergic</label>
+              <div>
+                <input class="form-control" type="text">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="password" class="control-label">Password</label>
+              <div>
+                <input class="form-control" type="password" id="password" name="password" [(ngModel)]="user.password">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="password2" class="control-label">Confirm password</label>
+              <div>
+                <input class="form-control" type="password" id="password2" name="password2" [(ngModel)]="user.password2">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label"></label>
+              <div>
+                <button type="submit" class="btn btn-primary" style="margin-top: 1rem;">Submit</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</form>

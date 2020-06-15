@@ -6,23 +6,24 @@ import { NgbTypeaheadSelectItemEvent } from '@ng-bootstrap/ng-bootstrap';
 import { catchError, debounceTime, distinctUntilChanged, flatMap } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 import { UploadService } from '../../shared/services/upload.service';
-import { ProviderService } from '../../shared/services/provider.service';
+
 
 @Component({
-  selector: 'app-register',
-  templateUrl: 'register.component.html',
-  styleUrls: ['register.component.scss']
+  selector: 'app-editprofile',
+  templateUrl: 'editprofile.component.html',
+  styleUrls: ['editprofile.component.scss']
 })
 
-export class RegisterComponent implements OnInit {
+export class EditProfileComponent implements OnInit {
   user = {
     name: '',
     email: '',
     password: '',
+    password2: '',
     thumb: null,
     address: '',
-    latitude: 41.0082376,
-    longitude: 28.9783589,
+    latitude: '',
+    longitude: '',
     phoneNumber: '',
     website: '',
     details: '',
@@ -31,8 +32,8 @@ export class RegisterComponent implements OnInit {
     preferences: ''
   };
 
-
   private userPicture: any;
+
 
   public addressFormatter = (f) => f.formatted_address;
 
@@ -61,7 +62,7 @@ export class RegisterComponent implements OnInit {
         return this.userService.login(this.user.email, this.user.password);
       }));
     })).subscribe(() => {
-      this.router.navigate(['providers']);
+      this.router.navigate(['userprofile']);
     });
   }
 

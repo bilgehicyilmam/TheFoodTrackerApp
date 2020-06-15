@@ -10,7 +10,13 @@ const routes: Routes = [
   {
     path: 'userprofile',
     loadChildren: () => import('src/app/pages/userprofile/userprofile.module').then(m => m.UserProfileModule),
-    // canActivate: [AuthGuardService]
+    canActivate: [AuthGuardService]
+  },
+
+  {
+    path: 'editprofile',
+    loadChildren: () => import('src/app/pages/editprofile/editprofile.module').then(m => m.EditProfileModule),
+    canActivate: [AuthGuardService]
   },
 
   {
