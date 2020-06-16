@@ -16,7 +16,7 @@ public class Recipe {
     private CreatedBy createdBy;
     private Map<String, Nutrient> nutrients;
     private List<String> tags;
-    private List<String> ingredients;
+    private List<Ingredient> ingredients;
 
     @Data
     public static class CreatedBy {
