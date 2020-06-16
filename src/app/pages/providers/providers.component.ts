@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../shared/services/user.service';
 import { Router } from '@angular/router';
 import { ProviderService } from '../../shared/services/provider.service';
-import { map } from 'rxjs/operators';
+import { map, filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-providers',
@@ -16,6 +16,8 @@ export class ProvidersComponent implements OnInit {
   loginFailed = false;
 
   providers$;
+
+  address = null;
 
   constructor(private userService: UserService, private router: Router, private providerService: ProviderService) {
   }
@@ -35,17 +37,24 @@ export class ProvidersComponent implements OnInit {
     });
   }
 
-  onFilterChange(filter: { [p: string]: string[] | string }) {
-    return this.getProviders(filter);
+  onFilterChange(q: { [p: string]: string[] | string }) {
+    return this.getProviders(q);
   }
 
-  getProviders(filter = {}) {
-    this.providers$ = this.providerService.getProviders(filter).pipe(map(providers => {
+  getProviders(q = {}) {
+    this.providers$ = this.providerService.getProviders(q).pipe(map(providers => {
       if (this.userService.getAuthenticatedUser()) {
         providers.forEach(p => {
           p.distance = this.getDistance(p, this.userService.getAuthenticatedUserSync());
         });
         providers.sort((a, b) => a.distance - b.distance);
+        if (this.address && this.address.length > 0) {
+          providers = providers.filter(provider => {
+              const address = provider.address || '';
+              return address.toLowerCase().indexOf(this.address.toLowerCase()) > -1;
+            }
+          );
+        }
       }
       return providers;
     }));
@@ -53,7 +62,6 @@ export class ProvidersComponent implements OnInit {
 
 
   getDistance(p1, p2) {
-    console.log(p1, p2);
     const R = 6378137; // Earth’s mean radius in meter
     const dLat = this.rad(p2.latitude - p1.latitude);
     const dLong = this.rad(p2.longitude - p1.longitude);
@@ -67,5 +75,10 @@ export class ProvidersComponent implements OnInit {
 
   rad(x) {
     return x * Math.PI / 180;
+  }
+
+  onAddressFilterChange(address) {
+    this.address = address;
+    return this.getProviders();
   }
 }
