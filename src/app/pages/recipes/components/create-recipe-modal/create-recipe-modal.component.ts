@@ -5,7 +5,7 @@ import { RecipeService } from '../../../../shared/services/recipe.service';
 import { Food } from '../../../../shared/models/food';
 import { UploadService } from '../../../../shared/services/upload.service';
 import { Recipe } from '../../../../shared/models/recipe';
-import {isInteger} from "@ng-bootstrap/ng-bootstrap/util/util";
+import { isInteger } from '@ng-bootstrap/ng-bootstrap/util/util';
 
 @Component({
   selector: 'app-create-recipe-modal',
@@ -64,7 +64,6 @@ export class CreateRecipeModalComponent implements OnInit {
     item.times = 1;
     item.amount = 100;
     this.ingredients.push(item);
-    console.log(this.ingredients);
     this.ingredientValue = '';
     this.calculateNutrientsForRecipe();
     this.recipeService.getIngredientDetails(item.fdcId).subscribe(res => {
@@ -79,6 +78,7 @@ export class CreateRecipeModalComponent implements OnInit {
 
   increaseIngredient(i: number) {
     this.ingredients[i].times++;
+    console.log(this.ingredients);
     this.calculateNutrientsForRecipe();
   }
 
@@ -111,8 +111,11 @@ export class CreateRecipeModalComponent implements OnInit {
 
   formSubmitted() {
     if (this.ingredients) {
-      this.recipe.ingredients = this.ingredients.map(i => i.description);
+      console.log(this.ingredients);
+      this.recipe.ingredients = this.mapIngredients();
+
     }
+
     if (!this.recipePicture) {
       this.recipeService.createRecipe(this.recipe).subscribe(res => {
         this.resetFormAndClose(res);
@@ -126,6 +129,24 @@ export class CreateRecipeModalComponent implements OnInit {
       });
     }
 
+
+  }
+
+  mapIngredients() {
+    return this.ingredients.map(ingredient => {
+      const amount = ingredient.amount;
+      ingredient.foodPortions.forEach(portion => {
+        const gramWeight = portion.gramWeight;
+        if (gramWeight === parseFloat(String(amount))) {
+          ingredient.portionText = portion.portionDescription + ' (' + portion.gramWeight + 'g)';
+          ingredient.portionText = ingredient.times > 1 ? ingredient.times + ' * (' + ingredient.portionText + ')' : ingredient.portionText;
+        }
+      });
+      return {
+        name: ingredient.description,
+        portion: ingredient.portionText
+      };
+    });
   }
 
   private resetFormAndClose(recipe: Recipe): void {

@@ -28,7 +28,7 @@
     <ng-container *ngIf="recipeDetails.ingredients && recipeDetails.ingredients.length > 0">
       <h3 style="text-decoration: underline" class="card-title">Ingredients</h3>
       <p  class="card-text" *ngFor="let ingredient of recipeDetails.ingredients">
-        - {{ingredient}}
+        - {{ingredient.name}} <span *ngIf="ingredient.portion">- {{ingredient.portion}}</span>
       </p>
     </ng-container>
 

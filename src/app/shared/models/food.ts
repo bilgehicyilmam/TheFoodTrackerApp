@@ -12,10 +12,12 @@ export interface Food {
     derivationCode: string;
     derivationDescription: string;
   }];
-  portions?: [{
+  foodPortions?: [{
     portionDescription: string;
     gramWeight: number;
   }];
+  portionText: string;
   times: number;
   amount: number;
+
 }

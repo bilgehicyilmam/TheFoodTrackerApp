@@ -48,7 +48,8 @@
                                              (click)="increaseIngredient(i)">{{ingredient.times > 1 ? '* ' + ingredient.times : '+'}}</span>
         </div>
         <div class="col-3 " style="padding-right: 30px">
-          <select class="custom-select custom-select-sm" (change)="onIngredientAmountChange(i, $event.target.value)">
+          <select class="custom-select custom-select-sm"
+                  (change)="onIngredientAmountChange(i, $event.target.value)">
             <option selected value="100">100g</option>
             <option value="1">1g</option>
             <option [value]="portion['gramWeight']"

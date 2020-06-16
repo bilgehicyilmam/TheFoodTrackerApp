@@ -12,7 +12,7 @@ export interface Recipe {
     name: string;
     thumb: string;
   };
-  ingredients: string[];
+  ingredients: any;
   nutrients?: { [key: string]: { amount: number } };
   tags?: string[];
 }
