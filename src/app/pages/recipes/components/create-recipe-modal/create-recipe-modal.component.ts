@@ -1,3 +1,4 @@
+/* tslint:disable:object-literal-key-quotes */
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { debounceTime, distinctUntilChanged, flatMap, map } from 'rxjs/operators';
@@ -38,6 +39,24 @@ export class CreateRecipeModalComponent implements OnInit {
 
   public objectKeys = Object.keys;
 
+  public tagMap = {
+    'Vegan': {
+      checked: true,
+      disabled: false,
+    },
+    'Vegetarian': {
+      checked: true,
+      disabled: false,
+    },
+    'Gluten-free': {
+      checked: true,
+      disabled: false,
+    },
+    'Sugar Free': {
+      checked: true,
+      disabled: false,
+    }
+  };
 
   private recipePicture;
 
@@ -83,11 +102,12 @@ export class CreateRecipeModalComponent implements OnInit {
   }
 
   calculateNutrientsForRecipe() {
+    this.resetTags();
     const nutrients: any = {};
     for (let i = 0; i < this.ingredients.length; i++) {
       const ingredient = this.ingredients[i];
       const { foodNutrients } = ingredient;
-
+      this.updateTags(ingredient);
       for (let j = 0; j < foodNutrients.length; j++) {
         const nutrient = foodNutrients[j];
         nutrients[nutrient.nutrientName] = nutrients[nutrient.nutrientName] || { amount: 0 };
@@ -173,8 +193,95 @@ export class CreateRecipeModalComponent implements OnInit {
     const value = $event.currentTarget.checked;
     if (value) {
       this.recipe.tags.push(tagValue);
+      this.tagMap[tagValue] = { checked: true, disabled: false };
     } else {
       this.recipe.tags = this.recipe.tags.filter(t => t !== tagValue);
+      this.tagMap[tagValue] = { checked: false, disabled: false };
     }
+  }
+
+  private updateTags(ingredient: Food) {
+    this.updateVegan(ingredient);
+    this.updateForSugarFree(ingredient);
+    this.updateForGlutenFree(ingredient);
+    this.updateForVegetarian(ingredient);
+  }
+
+
+  private updateVegan(ingredient: Food) {
+    const forbidden = ['beef', 'pork', 'lamb', 'meat', 'chicken', 'duck', 'poultry', 'fish', 'crab', 'clam', 'mussel', 'cheese', 'milk', 'butter', 'fat', 'mayonnaise', 'ice cream', 'dairy', 'honey', 'egg'];
+
+    const desc = ingredient.description.toLowerCase();
+
+    for (let i = 0; i < forbidden.length; i++) {
+      const word = forbidden[i];
+      if (desc.indexOf(word) > -1 || desc === word) {
+        // tslint:disable-next-line:no-string-literal
+        this.tagMap['Vegan'] = { checked: false, disabled: true };
+      }
+    }
+  }
+
+  private updateForVegetarian(ingredient: Food) {
+    const forbidden = ['beef', 'pork', 'lamb', 'meat', 'chicken', 'duck', 'poultry', 'fish', 'crab', 'clam', 'mussel'];
+
+    const desc = ingredient.description.toLowerCase();
+
+    for (let i = 0; i < forbidden.length; i++) {
+      const word = forbidden[i];
+      if (desc.indexOf(word) > -1 || desc === word) {
+        // tslint:disable-next-line:no-string-literal
+        this.tagMap['Vegetarian'] = { checked: false, disabled: true };
+      }
+    }
+  }
+
+  private updateForSugarFree(ingredient: Food) {
+    const forbidden = ['sweet', 'sugar', 'syrup'];
+
+    const desc = ingredient.description.toLowerCase();
+
+    for (let i = 0; i < forbidden.length; i++) {
+      const word = forbidden[i];
+      if (desc.indexOf(word) > -1 || desc === word) {
+        // tslint:disable-next-line:no-string-literal
+        this.tagMap['Sugar Free'] = { checked: false, disabled: true };
+      }
+    }
+  }
+
+  private updateForGlutenFree(ingredient: Food) {
+    const forbidden = ['wheat', 'flour'];
+
+    const desc = ingredient.description.toLowerCase();
+
+    for (let i = 0; i < forbidden.length; i++) {
+      const word = forbidden[i];
+      if (desc.indexOf(word) > -1 || desc === word) {
+        // tslint:disable-next-line:no-string-literal
+        this.tagMap['Gluten-free'] = { checked: false, disabled: true };
+      }
+    }
+  }
+
+  private resetTags() {
+    this.tagMap = {
+      'Vegan': {
+        checked: true,
+        disabled: false,
+      },
+      'Vegetarian': {
+        checked: true,
+        disabled: false,
+      },
+      'Gluten-free': {
+        checked: true,
+        disabled: false,
+      },
+      'Sugar Free': {
+        checked: true,
+        disabled: false,
+      }
+    };
   }
 }
