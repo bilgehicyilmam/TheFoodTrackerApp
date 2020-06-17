@@ -1,10 +1,11 @@
 export interface Recipe {
-  portionsize: number;
+
   id?: number;
   name: string;
   description: string;
   prepTime: number;
   cookTime: number;
+  portionsize: number;
   directions: string;
   thumbUrl?: string;
   createdBy?: {
@@ -12,7 +13,7 @@ export interface Recipe {
     name: string;
     thumb: string;
   };
-  ingredients: string[];
+  ingredients: any;
   nutrients?: { [key: string]: { amount: number } };
   tags?: string[];
 }

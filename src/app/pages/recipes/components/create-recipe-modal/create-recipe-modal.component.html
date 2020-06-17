@@ -24,7 +24,7 @@
       </div>
       <div class="col-4">
         <div class="form-group">
-          <label for="portionsize">Portion Size</label>
+          <label for="portionsize">Serving Size</label>
           <input type="text" class="form-control" id="portionsize" name="portionsize" [(ngModel)]="recipe.portionsize">
         </div>
       </div>
@@ -48,7 +48,8 @@
                                              (click)="increaseIngredient(i)">{{ingredient.times > 1 ? '* ' + ingredient.times : '+'}}</span>
         </div>
         <div class="col-3 " style="padding-right: 30px">
-          <select class="custom-select custom-select-sm" (change)="onIngredientAmountChange(i, $event.target.value)">
+          <select class="custom-select custom-select-sm"
+                  (change)="onIngredientAmountChange(i, $event.target.value)">
             <option selected value="100">100g</option>
             <option value="1">1g</option>
             <option [value]="portion['gramWeight']"
@@ -95,7 +96,27 @@
       <input type="file" class="form-control-file" id="recipePicture" (change)="selectRecipePicture($event)">
     </div>
 
+    <div class="form-check">
+      <input type="checkbox" class="form-check-input" id="vegan" (change)="onTagChange($event, 'Vegan')"
+             [checked]="tagMap['Vegan'].checked" [disabled]="tagMap['Vegan'].disabled">
+      <label class="form-check-label" for="vegan" style="margin-left: 0.8rem;">Vegan</label>
+    </div>
+    <div class="form-check">
+      <input type="checkbox" class="form-check-input" id="Vegetarian" (change)="onTagChange($event, 'Vegetarian')"
+             [checked]="tagMap['Vegetarian']" [disabled]="tagMap['Vegetarian'].disabled">
+      <label class="form-check-label" for="Vegetarian" style="margin-left: 0.8rem;">Vegetarian</label>
+    </div>
+    <div class="form-check">
+      <input type="checkbox" class="form-check-input" id="Gluten-free" (change)="onTagChange($event, 'Gluten-free')"
+             [checked]="tagMap['Gluten-free']" [disabled]="tagMap['Gluten-free'].disabled">
+      <label class="form-check-label" for="Gluten-free" style="margin-left: 0.8rem;">Gluten-free</label>
+    </div>
+    <div class="form-check">
+      <input type="checkbox" class="form-check-input" id="SugarFree" (change)="onTagChange($event, 'Sugar Free')"
+             [checked]="tagMap['Sugar Free']" [disabled]="tagMap['Sugar Free'].disabled">
+      <label class="form-check-label" for="SugarFree" style="margin-left: 0.8rem;">Sugar Free</label>
+    </div>
+
     <button type="submit" class="btn btn-primary" style="margin-top: 1rem;">Submit</button>
   </form>
 </app-modal>
-

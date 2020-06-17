@@ -5,16 +5,28 @@
   <div class="card-body" style="font-size: 1.6rem">
     <h3 style="text-decoration: underline" class="card-title">Description</h3>
     <p class="card-text">{{recipeDetails.description}}</p>
+
+    <ng-container *ngIf="recipeDetails.ingredients && recipeDetails.ingredients.length > 0">
+      <h3 style="text-decoration: underline" class="card-title">Ingredients</h3>
+      <p  class="card-text" *ngFor="let ingredient of recipeDetails.ingredients">
+        - {{ingredient.name}} <span *ngIf="ingredient.portion">- {{ingredient.portion}}</span>
+      </p>
+    </ng-container>
+
     <h3 style="text-decoration: underline" class="card-title">Directions</h3>
     <p class="card-text" style="white-space: pre;">{{recipeDetails.directions}}</p>
     <div class="row" style="margin-bottom: 0.75rem">
-      <div class="col-6">
+      <div class="col-4">
         <h3 style="text-decoration: underline" class="card-title">Prep Time</h3>
         <p class="card-text">{{recipeDetails.prepTime}} minutes</p>
       </div>
-      <div class="col-6">
+      <div class="col-4">
         <h3 style="text-decoration: underline" class="card-title">Cook Time</h3>
         <p class="card-text">{{recipeDetails.cookTime}} minutes</p>
+      </div>
+      <div class="col-4">
+        <h3 style="text-decoration: underline" class="card-title">Serving Size</h3>
+        <p class="card-text">{{recipeDetails.portionsize}} portion</p>
       </div>
     </div>
 
@@ -22,13 +34,6 @@
       <h3 style="text-decoration: underline" class="card-title">Tags</h3>
       <p class="card-text" *ngFor="let tag of recipeDetails.tags">
         {{tag}}
-      </p>
-    </ng-container>
-
-    <ng-container *ngIf="recipeDetails.ingredients && recipeDetails.ingredients.length > 0">
-      <h3 style="text-decoration: underline" class="card-title">Ingredients</h3>
-      <p  class="card-text" *ngFor="let ingredient of recipeDetails.ingredients">
-        - {{ingredient}}
       </p>
     </ng-container>
 
