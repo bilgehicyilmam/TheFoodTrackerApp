@@ -6,6 +6,13 @@
     <app-multi-select label="Status" [options]="statusOptions" (selectionChange)="onSelectionChange($event, 'tags')"
                       class="mr-sm"></app-multi-select>
   </div>
+
+  <div class="filter__search-box" style="margin-left: 1rem;">
+    <input type="text" class="filter__search" [class.filter--loading]="searchLoading" [(ngModel)]="address"
+           (ngModelChange)="onAddressSearchChange(address)"
+           placeholder="Search by address">
+  </div>
+
   <div class="filter__search-box">
     <input type="text" class="filter__search" [class.filter--loading]="searchLoading" [(ngModel)]="restaurant"
            (ngModelChange)="onSearchChange(restaurant)"

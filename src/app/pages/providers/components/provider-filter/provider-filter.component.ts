@@ -19,11 +19,15 @@ export class ProviderFilterComponent implements OnInit {
    */
   @Output()
   public filterChange: EventEmitter<{ [key: string]: string[] | string }> = new EventEmitter();
+
+  @Output()
+  public addressFilterChange: EventEmitter<string> = new EventEmitter();
   public statusOptions: string[];
 
   public searchLoading = false;
 
   public restaurant: string;
+  public address: string;
   public restaurant$: Subject<string> = new Subject();
 
   constructor() {
@@ -72,5 +76,9 @@ export class ProviderFilterComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  onAddressSearchChange(address: string) {
+    this.addressFilterChange.emit(address);
   }
 }

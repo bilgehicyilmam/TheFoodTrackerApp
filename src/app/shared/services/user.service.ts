@@ -12,8 +12,8 @@ export class UserService {
 
   private currentUser = null;
 
-  private api = 'http://ec2-3-134-80-99.us-east-2.compute.amazonaws.com:8080/users';
-  // private api = 'http://localhost:8080/users';
+  // private api = 'http://ec2-3-134-80-99.us-east-2.compute.amazonaws.com:8080/users';
+  private api = 'http://localhost:8080/users';
 
 
   constructor(private http: HttpClient) {
