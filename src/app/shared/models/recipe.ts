@@ -1,5 +1,5 @@
 export interface Recipe {
-  portionsize: number;
+  portionSize: number;
   id?: number;
   name: string;
   description: string;

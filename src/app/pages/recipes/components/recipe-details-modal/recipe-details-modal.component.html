@@ -7,6 +7,9 @@
     <p class="card-text">{{recipeDetails.description}}</p>
     <h3 style="text-decoration: underline" class="card-title">Directions</h3>
     <p class="card-text" style="white-space: pre;">{{recipeDetails.directions}}</p>
+    <h3 style="text-decoration: underline" class="card-title" *ngIf="recipeDetails.portionSize">Portion Size</h3>
+    <p class="card-text" style="white-space: pre;" *ngIf="recipeDetails.portionSize">{{recipeDetails.portionSize}}
+      people</p>
     <div class="row" style="margin-bottom: 0.75rem">
       <div class="col-6">
         <h3 style="text-decoration: underline" class="card-title">Prep Time</h3>
@@ -27,19 +30,19 @@
 
     <ng-container *ngIf="recipeDetails.ingredients && recipeDetails.ingredients.length > 0">
       <h3 style="text-decoration: underline" class="card-title">Ingredients</h3>
-      <p  class="card-text" *ngFor="let ingredient of recipeDetails.ingredients">
+      <p class="card-text" *ngFor="let ingredient of recipeDetails.ingredients">
         - {{ingredient.name}} <span *ngIf="ingredient.portion">- {{ingredient.portion}}</span>
       </p>
     </ng-container>
 
     <div *ngIf="recipeDetails.nutrients">
-      <h3 style="text-decoration: underline" class="card-title">Nutrients</h3>
+      <h3 style="text-decoration: underline" class="card-title">Nutrients (1 person)</h3>
       <div class="row">
         <div class="col-6">
           <ng-container *ngFor="let nutrientKey of objectKeys(recipeDetails.nutrients); let i = index">
             <div class="" *ngIf="i < objectKeys(recipeDetails.nutrients).length / 2">
               <div class="nut-label">{{nutrientKey}}:</div>
-              <div class="nut-value">{{recipeDetails.nutrients[nutrientKey].amount | number}}</div>
+              <div class="nut-value">{{recipeDetails.nutrients[nutrientKey].amount / recipeDetails.portionSize | number}}</div>
             </div>
           </ng-container>
         </div>
@@ -47,7 +50,7 @@
           <ng-container *ngFor="let nutrientKey of objectKeys(recipeDetails.nutrients); let i = index">
             <div *ngIf="i >= objectKeys(recipeDetails.nutrients).length / 2">
               <div class="nut-label">{{nutrientKey}}:</div>
-              <div class="nut-value">{{recipeDetails.nutrients[nutrientKey].amount | number}}</div>
+              <div class="nut-value">{{recipeDetails.nutrients[nutrientKey].amount / recipeDetails.portionSize | number}}</div>
             </div>
           </ng-container>
         </div>

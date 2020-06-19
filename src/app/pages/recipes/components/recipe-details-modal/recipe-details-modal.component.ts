@@ -18,6 +18,7 @@ export class RecipeDetailsModalComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(this.recipeDetails);
   }
 
 }

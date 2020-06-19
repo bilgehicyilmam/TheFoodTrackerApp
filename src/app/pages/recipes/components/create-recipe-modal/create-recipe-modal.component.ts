@@ -18,7 +18,7 @@ export class CreateRecipeModalComponent implements OnInit {
   @Output() closed = new EventEmitter<Recipe>();
 
   public recipe: Recipe = {
-    portionsize: null,
+    portionSize: null,
     name: '',
     description: '',
     prepTime: null,
@@ -28,7 +28,6 @@ export class CreateRecipeModalComponent implements OnInit {
     nutrients: {},
     ingredients: [],
     tags: []
-
   };
   public ingredientModel;
   public ingredientValue;
@@ -36,27 +35,7 @@ export class CreateRecipeModalComponent implements OnInit {
 
   public showNutrientDetails: boolean;
 
-
   public objectKeys = Object.keys;
-
-  public tagMap = {
-    'Vegan': {
-      checked: true,
-      disabled: false,
-    },
-    'Vegetarian': {
-      checked: true,
-      disabled: false,
-    },
-    'Gluten-free': {
-      checked: true,
-      disabled: false,
-    },
-    'Sugar Free': {
-      checked: true,
-      disabled: false,
-    }
-  };
 
   private recipePicture;
 
@@ -97,17 +76,14 @@ export class CreateRecipeModalComponent implements OnInit {
 
   increaseIngredient(i: number) {
     this.ingredients[i].times++;
-    console.log(this.ingredients);
     this.calculateNutrientsForRecipe();
   }
 
   calculateNutrientsForRecipe() {
-    this.resetTags();
     const nutrients: any = {};
     for (let i = 0; i < this.ingredients.length; i++) {
       const ingredient = this.ingredients[i];
       const { foodNutrients } = ingredient;
-      this.updateTags(ingredient);
       for (let j = 0; j < foodNutrients.length; j++) {
         const nutrient = foodNutrients[j];
         nutrients[nutrient.nutrientName] = nutrients[nutrient.nutrientName] || { amount: 0 };
@@ -115,7 +91,6 @@ export class CreateRecipeModalComponent implements OnInit {
       }
 
     }
-    console.log(nutrients);
     this.recipe.nutrients = nutrients;
 
   }
@@ -131,10 +106,10 @@ export class CreateRecipeModalComponent implements OnInit {
 
   formSubmitted() {
     if (this.ingredients) {
-      console.log(this.ingredients);
       this.recipe.ingredients = this.mapIngredients();
-
     }
+
+    this.recipe.tags = this.calculateTags(this.ingredients);
 
     if (!this.recipePicture) {
       this.recipeService.createRecipe(this.recipe).subscribe(res => {
@@ -148,8 +123,6 @@ export class CreateRecipeModalComponent implements OnInit {
         this.resetFormAndClose(res);
       });
     }
-
-
   }
 
   mapIngredients() {
@@ -172,7 +145,7 @@ export class CreateRecipeModalComponent implements OnInit {
   private resetFormAndClose(recipe: Recipe): void {
     this.closed.emit(recipe);
     this.recipe = {
-      portionsize: null,
+      portionSize: null,
       name: '',
       description: '',
       prepTime: null,
@@ -189,99 +162,38 @@ export class CreateRecipeModalComponent implements OnInit {
   }
 
 
-  onTagChange($event: any, tagValue: string) {
-    const value = $event.currentTarget.checked;
-    if (value) {
-      this.recipe.tags.push(tagValue);
-      this.tagMap[tagValue] = { checked: true, disabled: false };
-    } else {
-      this.recipe.tags = this.recipe.tags.filter(t => t !== tagValue);
-      this.tagMap[tagValue] = { checked: false, disabled: false };
+  private calculateTags(ingredients: any) {
+    const tags = [];
+    const vegan = ['beef', 'pork', 'lamb', 'meat', 'chicken', 'duck', 'poultry', 'fish', 'crab', 'clam', 'mussel', 'cheese', 'milk', 'butter', 'fat', 'mayonnaise', 'ice cream', 'dairy', 'honey', 'egg'];
+    const vegetarian = ['beef', 'pork', 'lamb', 'meat', 'chicken', 'duck', 'poultry', 'fish', 'crab', 'clam', 'mussel'];
+    const sugar = ['sweet', 'sugar', 'syrup'];
+    const glutenFree = ['wheat', 'flour'];
+    if (this.ingredientsContain(ingredients, vegan)) {
+      tags.push('Vegan');
     }
+    if (this.ingredientsContain(ingredients, vegetarian)) {
+      tags.push('Vegetarian');
+    }
+    if (this.ingredientsContain(ingredients, sugar)) {
+      tags.push('Sugar Free');
+    }
+    if (this.ingredientsContain(ingredients, glutenFree)) {
+      tags.push('Gluten-free');
+    }
+    return tags;
   }
 
-  private updateTags(ingredient: Food) {
-    this.updateVegan(ingredient);
-    this.updateForSugarFree(ingredient);
-    this.updateForGlutenFree(ingredient);
-    this.updateForVegetarian(ingredient);
-  }
-
-
-  private updateVegan(ingredient: Food) {
-    const forbidden = ['beef', 'pork', 'lamb', 'meat', 'chicken', 'duck', 'poultry', 'fish', 'crab', 'clam', 'mussel', 'cheese', 'milk', 'butter', 'fat', 'mayonnaise', 'ice cream', 'dairy', 'honey', 'egg'];
-
-    const desc = ingredient.description.toLowerCase();
-
+  private ingredientsContain(ingredients: Food[], forbidden: string[]): boolean {
     for (let i = 0; i < forbidden.length; i++) {
       const word = forbidden[i];
-      if (desc.indexOf(word) > -1 || desc === word) {
-        // tslint:disable-next-line:no-string-literal
-        this.tagMap['Vegan'] = { checked: false, disabled: true };
+      for (let j = 0; j < ingredients.length; j++) {
+        console.log(ingredients[j]);
+        const desc = ingredients[j].description.toLowerCase();
+        if (desc.indexOf(word) > -1 || desc === word) {
+          return false;
+        }
       }
     }
-  }
-
-  private updateForVegetarian(ingredient: Food) {
-    const forbidden = ['beef', 'pork', 'lamb', 'meat', 'chicken', 'duck', 'poultry', 'fish', 'crab', 'clam', 'mussel'];
-
-    const desc = ingredient.description.toLowerCase();
-
-    for (let i = 0; i < forbidden.length; i++) {
-      const word = forbidden[i];
-      if (desc.indexOf(word) > -1 || desc === word) {
-        // tslint:disable-next-line:no-string-literal
-        this.tagMap['Vegetarian'] = { checked: false, disabled: true };
-      }
-    }
-  }
-
-  private updateForSugarFree(ingredient: Food) {
-    const forbidden = ['sweet', 'sugar', 'syrup'];
-
-    const desc = ingredient.description.toLowerCase();
-
-    for (let i = 0; i < forbidden.length; i++) {
-      const word = forbidden[i];
-      if (desc.indexOf(word) > -1 || desc === word) {
-        // tslint:disable-next-line:no-string-literal
-        this.tagMap['Sugar Free'] = { checked: false, disabled: true };
-      }
-    }
-  }
-
-  private updateForGlutenFree(ingredient: Food) {
-    const forbidden = ['wheat', 'flour'];
-
-    const desc = ingredient.description.toLowerCase();
-
-    for (let i = 0; i < forbidden.length; i++) {
-      const word = forbidden[i];
-      if (desc.indexOf(word) > -1 || desc === word) {
-        // tslint:disable-next-line:no-string-literal
-        this.tagMap['Gluten-free'] = { checked: false, disabled: true };
-      }
-    }
-  }
-
-  private resetTags() {
-    this.tagMap = {
-      'Vegan': {
-        checked: true,
-        disabled: false,
-      },
-      'Vegetarian': {
-        checked: true,
-        disabled: false,
-      },
-      'Gluten-free': {
-        checked: true,
-        disabled: false,
-      },
-      'Sugar Free': {
-        checked: true,
-        disabled: false,
-      }
-    };
+    return true;
   }
 }
