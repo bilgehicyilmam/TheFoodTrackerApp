@@ -33,11 +33,11 @@
 
   &__search {
     padding: 0.8rem 1.2rem 0.8rem 2.5rem;
-    background: $color-white url(/assets/icons/search.svg) no-repeat 0.7rem 1rem;
+    background: $color-white url("/assets/icons/search.svg") no-repeat 0.7rem 1rem;
   }
 
   &--loading {
-    background: url(/assets/icons/spinner.gif) no-repeat 0.7rem 1rem;
+    background: url("/assets/icons/spinner.gif") no-repeat 0.7rem 1rem;
     background-size: 1.3rem 1.3rem;
   }
 
