@@ -2,8 +2,7 @@ package com.hicyilmam.food_tracker_api.controllers;
 
 import com.hicyilmam.food_tracker_api.FoodTrackerApiApplicationTests;
 import com.hicyilmam.food_tracker_api.models.Recipe;
-import com.hicyilmam.food_tracker_api.repositories.RecipeRepository;
-import com.hicyilmam.food_tracker_api.repositories.UserRepository;
+import com.hicyilmam.food_tracker_api.repositories.RecipeService;
 import java.util.Arrays;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,11 +15,11 @@ class RecipeControllerTest extends FoodTrackerApiApplicationTests {
     private RecipeController recipeController;
 
     @Autowired
-    private RecipeRepository recipeRepository;
+    private RecipeService recipeService;
 
     @BeforeEach
     void setUp() {
-        recipeRepository.removeAll();
+        recipeService.removeAll();
     }
 
     @Test
@@ -39,7 +38,7 @@ class RecipeControllerTest extends FoodTrackerApiApplicationTests {
 
         final var createdRecipe = recipeController.addRecipe(recipe);
 
-        final var recipeFromDb = recipeRepository.findOne(createdRecipe.getId());
+        final var recipeFromDb = recipeService.findOne(createdRecipe.getId());
 
         assertEquals(createdRecipe, recipeFromDb);
         assertEquals(recipe, recipeFromDb);
@@ -50,8 +49,8 @@ class RecipeControllerTest extends FoodTrackerApiApplicationTests {
         final var recipe1 = new Recipe();
         final var recipe2 = new Recipe();
 
-        recipeRepository.save(recipe1);
-        recipeRepository.save(recipe2);
+        recipeService.save(recipe1);
+        recipeService.save(recipe2);
 
         final var recipes = recipeController.getRecipes();
 

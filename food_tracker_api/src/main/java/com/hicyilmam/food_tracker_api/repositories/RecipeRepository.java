@@ -1,46 +1,7 @@
 package com.hicyilmam.food_tracker_api.repositories;
 
 import com.hicyilmam.food_tracker_api.models.Recipe;
-import java.util.ArrayList;
-import java.util.List;
-import org.springframework.stereotype.Service;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
-@Service
-public class RecipeRepository {
-    private List<Recipe> recipes = new ArrayList<>();
-
-    public Recipe save(Recipe recipe) {
-        if (recipe.getId() == null) {
-            recipe.setId(recipes.size());
-            recipes.add(recipe);
-        } else {
-            updateRecipe(recipe);
-        }
-        return recipe;
-    }
-
-    private void updateRecipe(final Recipe recipe) {
-        for (int i = 0; i < recipes.size(); i++) {
-            if (recipes.get(i).getId().equals(recipe.getId())) {
-                recipes.set(i, recipe);
-            }
-        }
-    }
-
-    public List<Recipe> findAll() {
-        return recipes;
-    }
-
-    public Recipe findOne(final Integer id) {
-        for (Recipe recipe : recipes) {
-            if (id.equals(recipe.getId())) {
-                return recipe;
-            }
-        }
-        return null;
-    }
-
-    public void removeAll() {
-        this.recipes = new ArrayList<>();
-    }
+public interface RecipeRepository extends MongoRepository<Recipe, String> {
 }

@@ -2,8 +2,8 @@ package com.hicyilmam.food_tracker_api.controllers;
 
 import com.hicyilmam.food_tracker_api.FoodTrackerApiApplicationTests;
 import com.hicyilmam.food_tracker_api.models.User;
-import com.hicyilmam.food_tracker_api.repositories.RecipeRepository;
-import com.hicyilmam.food_tracker_api.repositories.UserRepository;
+import com.hicyilmam.food_tracker_api.repositories.RecipeService;
+import com.hicyilmam.food_tracker_api.repositories.UserService;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,15 +18,15 @@ class UserControllerTest extends FoodTrackerApiApplicationTests {
     private UserController userController;
 
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
 
     @Autowired
-    private RecipeRepository recipeRepository;
+    private RecipeService recipeService;
 
     @BeforeEach
     void setUp() {
-        userRepository.removeAll();
-        recipeRepository.removeAll();
+        userService.removeAll();
+        recipeService.removeAll();
     }
 
     @Test
@@ -47,7 +47,7 @@ class UserControllerTest extends FoodTrackerApiApplicationTests {
         userController.addUser(user);
 
         // then
-        final var registeredUser = userRepository.findByEmailAndPassword(user.getEmail(), user.getPassword());
+        final var registeredUser = userService.findByEmailAndPassword(user.getEmail(), user.getPassword());
         assertEquals(user, registeredUser);
     }
 
@@ -56,8 +56,8 @@ class UserControllerTest extends FoodTrackerApiApplicationTests {
         User user1 = new User();
         User user2 = new User();
 
-        userRepository.save(user1);
-        userRepository.save(user2);
+        userService.save(user1);
+        userService.save(user2);
 
         final var users = userController.getUsers();
 
@@ -72,7 +72,7 @@ class UserControllerTest extends FoodTrackerApiApplicationTests {
         user.setEmail("test@test.com");
         user.setPassword("123456");
 
-        userRepository.save(user);
+        userService.save(user);
 
         final var request = new LoginRequest();
         request.setEmail(user.getEmail());

@@ -2,11 +2,13 @@ package com.hicyilmam.food_tracker_api.models;
 
 import java.util.List;
 import java.util.Map;
+import javax.persistence.Id;
 import lombok.Data;
 
 @Data
 public class Recipe {
-    private Integer id;
+    @Id
+    private String id;
     private String name;
     private String description;
     private Integer prepTime;

@@ -10,4 +10,4 @@ echo "Copying new version"
 cp deploy/food_tracker_api-0.0.1.jar food_tracker_api-0.0.1.jar
 
 echo "Starting server"
-java -jar food_tracker_api-0.0.1.jar > out.log &
+nohup java -jar food_tracker_api-0.0.1.jar &

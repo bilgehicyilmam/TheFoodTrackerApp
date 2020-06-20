@@ -1,7 +1,7 @@
 package com.hicyilmam.food_tracker_api.controllers;
 
 import com.hicyilmam.food_tracker_api.models.Recipe;
-import com.hicyilmam.food_tracker_api.repositories.RecipeRepository;
+import com.hicyilmam.food_tracker_api.repositories.RecipeService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,20 +14,20 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/recipes")
 public class RecipeController {
 
-    private final RecipeRepository recipeRepository;
+    private final RecipeService recipeService;
 
     @Autowired
-    public RecipeController(final RecipeRepository recipeRepository) {
-        this.recipeRepository = recipeRepository;
+    public RecipeController(final RecipeService recipeService) {
+        this.recipeService = recipeService;
     }
 
     @PostMapping
     public Recipe addRecipe(@RequestBody final Recipe recipe) {
-        return recipeRepository.save(recipe);
+        return recipeService.save(recipe);
     }
 
     @GetMapping
     public List<Recipe> getRecipes() {
-        return recipeRepository.findAll();
+        return recipeService.findAll();
     }
 }
