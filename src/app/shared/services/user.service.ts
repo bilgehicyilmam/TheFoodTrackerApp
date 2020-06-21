@@ -22,6 +22,9 @@ export class UserService {
   public login(email: string, password: string) {
     return this.http.post(this.api + '/login', { email, password }).pipe(map(res => {
       this.currentUser = res;
+      if (res === null) {
+        return res;
+      }
       this.loggedIn.emit(true);
       this.username.emit(this.currentUser.name);
       return res;
@@ -56,7 +59,7 @@ export class UserService {
     }));
   }
 
-  logout(){
-    this.currentUser=null;
+  logout() {
+    this.currentUser = null;
   }
 }
