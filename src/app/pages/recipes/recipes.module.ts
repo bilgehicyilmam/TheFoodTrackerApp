@@ -12,7 +12,7 @@ import { RecipeDetailsModalComponent } from './components/recipe-details-modal/r
 
 
 @NgModule({
-  declarations: [RecipesComponent, RecipeListComponent, RecipeFilterComponent, CreateRecipeModalComponent, RecipeDetailsModalComponent],
+  declarations: [RecipesComponent, RecipeFilterComponent, CreateRecipeModalComponent, RecipeDetailsModalComponent],
   imports: [
     CommonModule,
     SharedModule,

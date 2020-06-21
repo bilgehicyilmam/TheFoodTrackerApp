@@ -13,12 +13,13 @@ import { MultiSelectComponent } from './components/multi-select/multi-select.com
 
 import { CommonModule } from '@angular/common';
 import { ProviderService } from './services/provider.service';
+import { RecipeListComponent } from './components/recipe-list/recipe-list.component';
 
 
 @NgModule({
   imports: [RouterModule, HttpClientModule, CommonModule],
-  exports: [OrderPipe, NavigationComponent, LimitPipe, RecipeFilterPipe, ModalComponent, MultiSelectComponent],
-  declarations: [OrderPipe, NavigationComponent, LimitPipe, RecipeFilterPipe, ModalComponent, MultiSelectComponent],
+  exports: [OrderPipe, NavigationComponent, LimitPipe, RecipeFilterPipe, ModalComponent, MultiSelectComponent, RecipeListComponent],
+  declarations: [OrderPipe, NavigationComponent, LimitPipe, RecipeFilterPipe, ModalComponent, MultiSelectComponent, RecipeListComponent],
   providers: [RecipeService, UploadService, AuthGuardService, ProviderService],
 })
 export class SharedModule {

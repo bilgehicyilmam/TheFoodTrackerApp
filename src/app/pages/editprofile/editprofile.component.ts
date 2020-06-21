@@ -15,22 +15,23 @@ import { UploadService } from '../../shared/services/upload.service';
 })
 
 export class EditProfileComponent implements OnInit {
-  user = {
-    name: '',
-    email: '',
-    password: '',
-    password2: '',
-    thumb: null,
-    address: '',
-    latitude: '',
-    longitude: '',
-    phoneNumber: '',
-    website: '',
-    details: '',
-    restaurant: false,
-    tags: [],
-    preferences: ''
-  };
+  user;
+  // user = {
+  //   name: '',
+  //   email: '',
+  //   password: '',
+  //   password2: '',
+  //   thumb: null,
+  //   address: '',
+  //   latitude: '',
+  //   longitude: '',
+  //   phoneNumber: '',
+  //   website: '',
+  //   details: '',
+  //   restaurant: false,
+  //   tags: [],
+  //   preferences: ''
+  // };
 
   private userPicture: any;
 
@@ -44,21 +45,27 @@ export class EditProfileComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.user = this.userService.getAuthenticatedUserSync();
+
   }
 
   formSubmitted() {
+
     const userThumbUpload = this.userPicture ? this.uploadService.uploadFile(this.userPicture) : of(null);
+
+    console.log(userThumbUpload);
 
     userThumbUpload.pipe(flatMap(userThumbRes => {
       if (userThumbRes) {
         this.user.thumb = userThumbRes.Location;
       }
+      console.log(userThumbRes);
       // tslint:disable-next-line:no-string-literal
       if (this.user.address && this.user.address['formatted_address']) {
         // tslint:disable-next-line:no-string-literal
         this.user.address = this.user.address['formatted_address'];
       }
-      return this.userService.register(this.user).pipe(flatMap(() => {
+      return this.userService.update(this.user).pipe(flatMap(() => {
         return this.userService.login(this.user.email, this.user.password);
       }));
     })).subscribe(() => {

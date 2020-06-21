@@ -1,29 +1,31 @@
 import { Component, OnInit } from '@angular/core';
 import { RecipeService } from '../../shared/services/recipe.service';
-import { ActivatedRoute } from '@angular/router';
-import { RecipeListComponent } from '../recipes/components/recipe-list/recipe-list.component';
-import {Recipe} from "../../shared/models/recipe";
-import { UserService } from "../../shared/services/user.service";
+import { UserService } from '../../shared/services/user.service';
 
 
 @Component({
   selector: 'app-userprofile',
-  templateUrl: './userprofile.component.html' ,
+  templateUrl: './userprofile.component.html',
   styleUrls: ['./userprofile.component.scss']
 })
 export class UserProfileComponent implements OnInit {
 
-  isLoggedIn: boolean;
-  username: string;
+  user;
+  recipes;
+  recipeDetails;
 
-
-  constructor( private userService: UserService) {
+  constructor(private userService: UserService, private recipeService: RecipeService) {
 
   }
 
   ngOnInit(): void {
-    this.userService.loggedIn.subscribe((data: boolean) => this.isLoggedIn = data);
-    this.userService.username.subscribe((data: string) => this.username = data);
+    this.user = this.userService.getAuthenticatedUserSync();
+    this.recipeService.getRecipes().subscribe(res => {
+      this.recipes = res.filter(recipe => {
+        return recipe.userId === this.user.id;
+      });
+    });
+
   }
 
 }

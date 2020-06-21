@@ -8,11 +8,12 @@ export interface Recipe {
   directions: string;
   thumbUrl?: string;
   createdBy?: {
-    id: number;
+    id: string;
     name: string;
     thumb: string;
   };
   ingredients: any;
   nutrients?: { [key: string]: { amount: number } };
   tags?: string[];
+  userId?: string;
 }

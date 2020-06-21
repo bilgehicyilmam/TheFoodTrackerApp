@@ -35,7 +35,12 @@ export class UserService {
     return this.http.post(this.api, user);
   }
 
-  public getAuthenticatedUser(): Observable<{ id: number, name: string, thumb: string }> {
+  public update(user) {
+    return this.http.put(this.api, user);
+  }
+
+
+  public getAuthenticatedUser(): Observable<{ id: string, name: string, thumb: string }> {
     return of(this.currentUser);
   }
 

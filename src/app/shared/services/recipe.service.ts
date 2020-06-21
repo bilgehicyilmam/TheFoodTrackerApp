@@ -42,6 +42,13 @@ export class RecipeService {
     }));
   }
 
+  public getRecipesByUserId(id: string) {
+    return this.http.get(`${this.api}/getByUserId?id=${id}`)
+      .pipe(map((res: any) => {
+        return res.foods;
+      }));
+  }
+
   getIngredientDetails(ingredientId): Observable<[{
     portionDescription: string;
     gramWeight: number;
@@ -64,12 +71,12 @@ export class RecipeService {
     return this.userService.getAuthenticatedUser().pipe(map(res => {
 
       const { id, name, thumb } = res;
+      recipeCopy.userId = id;
       recipeCopy.createdBy = {
         id,
         name,
         thumb
       };
-      console.log(recipeCopy);
     }));
   }
 }

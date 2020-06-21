@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { EditProfileRoutingModule } from './editprofile-routing.module';
-import {EditProfileComponent} from "./editprofile.component";
+import { EditProfileComponent } from './editprofile.component';
 
 
 @NgModule({
