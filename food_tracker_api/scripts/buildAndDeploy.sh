@@ -7,4 +7,4 @@ ssh ec2-user@ec2-3-134-80-99.us-east-2.compute.amazonaws.com -i "foodtrackernew.
 
 
 
-docker run --name food-mongo -p 27017:27017 mongo & sleep 5
+sudo docker run --name food-mongo -p 27017:27017 mongo & sleep 5

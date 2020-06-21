@@ -62,8 +62,8 @@ class UserControllerTest extends FoodTrackerApiApplicationTests {
         final var users = userController.getUsers();
 
         assertEquals(2, users.size());
-        assertEquals(user1, users.get(0));
-        assertEquals(user2, users.get(1));
+        assertEquals(user1.getId(), users.get(0).getId());
+        assertEquals(user2.getId(), users.get(1).getId());
     }
 
     @Test

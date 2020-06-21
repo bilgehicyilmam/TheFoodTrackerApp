@@ -2,8 +2,8 @@ package com.hicyilmam.food_tracker_api.models;
 
 import java.math.BigDecimal;
 import java.util.List;
-import javax.persistence.Id;
 import lombok.Data;
+import org.springframework.data.annotation.Id;
 
 @Data
 public class User {
@@ -21,4 +21,5 @@ public class User {
     private String details;
     private boolean restaurant;
     private List<String> tags;
+    private List<String> allergens;
 }

@@ -2,8 +2,8 @@ package com.hicyilmam.food_tracker_api.models;
 
 import java.util.List;
 import java.util.Map;
-import javax.persistence.Id;
 import lombok.Data;
+import org.springframework.data.annotation.Id;
 
 @Data
 public class Recipe {
