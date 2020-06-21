@@ -1,6 +1,7 @@
 package com.hicyilmam.food_tracker_api.models;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
@@ -20,6 +21,6 @@ public class User {
     private String website;
     private String details;
     private boolean restaurant;
-    private List<String> tags;
-    private List<String> allergens;
+    private List<String> tags = new ArrayList<>();
+    private List<String> allergens = new ArrayList<>();
 }

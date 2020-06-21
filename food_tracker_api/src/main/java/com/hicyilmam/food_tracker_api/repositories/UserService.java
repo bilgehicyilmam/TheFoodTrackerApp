@@ -28,6 +28,9 @@ public class UserService {
     public List<User> findAll() {
         final var recipes = recipeService.findAll();
         final var users = userRepository.findAll();
+
+        System.out.println(recipes);
+        System.out.println(users);
         for (User user : users) {
             Set<String> userTags = new HashSet<>();
             List<Recipe> userRecipes = recipes.stream().filter(r -> r.getCreatedBy().getId().equals(user.getId())).collect(Collectors.toList());

@@ -23,7 +23,7 @@ public class Recipe {
 
     @Data
     public static class CreatedBy {
-        private Integer id;
+        private String id;
         private String name;
         private String thumb;
     }
