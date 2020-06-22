@@ -35,7 +35,6 @@ export class ProviderFilterComponent implements OnInit {
       'Vegan',
       'Vegetarian',
       'Gluten-free',
-      'Lactose Free',
       'Sugar Free'
     ];
     // this.shiftOptions = this.getValuesInObject(ReservationShift);

@@ -167,7 +167,7 @@ export class CreateRecipeModalComponent implements OnInit {
     const vegan = ['beef', 'pork', 'lamb', 'meat', 'chicken', 'duck', 'poultry', 'fish', 'crab', 'clam', 'mussel', 'cheese', 'milk', 'butter', 'fat', 'mayonnaise', 'ice cream', 'dairy', 'honey', 'egg'];
     const vegetarian = ['beef', 'pork', 'lamb', 'meat', 'chicken', 'duck', 'poultry', 'fish', 'crab', 'clam', 'mussel'];
     const sugar = ['sweet', 'sugar', 'syrup'];
-    const glutenFree = ['wheat', 'flour'];
+    const glutenFree = ['wheat', 'flour', 'barley', 'malt', 'oat', 'pasta', 'noodle', 'soy sauce', 'bulgur'];
     if (this.ingredientsContain(ingredients, vegan)) {
       tags.push('Vegan');
     }
