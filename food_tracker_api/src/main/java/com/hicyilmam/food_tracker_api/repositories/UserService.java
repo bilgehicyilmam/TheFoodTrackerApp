@@ -33,7 +33,7 @@ public class UserService {
         System.out.println(users);
         for (User user : users) {
             Set<String> userTags = new HashSet<>();
-            List<Recipe> userRecipes = recipes.stream().filter(r -> r.getCreatedBy().getId().equals(user.getId())).collect(Collectors.toList());
+            List<Recipe> userRecipes = recipes.stream().filter(r -> user.getId().equals(r.getUserId())).collect(Collectors.toList());
             userRecipes.forEach(r -> userTags.addAll(r.getTags()));
             user.setTags(new ArrayList<>(userTags));
         }

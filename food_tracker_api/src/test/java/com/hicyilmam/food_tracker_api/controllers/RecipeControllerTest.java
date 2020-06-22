@@ -32,7 +32,6 @@ class RecipeControllerTest extends FoodTrackerApiApplicationTests {
         recipe.setDirections("directions");
         recipe.setTags(Arrays.asList("Vegan", "Vegetarian"));
         final var createdBy = new Recipe.CreatedBy();
-        createdBy.setId("0");
         createdBy.setName("Test user");
         createdBy.setThumb("test thumb");
 

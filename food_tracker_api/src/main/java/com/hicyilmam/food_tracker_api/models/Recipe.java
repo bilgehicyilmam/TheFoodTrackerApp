@@ -20,10 +20,10 @@ public class Recipe {
     private List<String> tags;
     private List<Ingredient> ingredients;
     private Integer portionSize;
+    private String userId;
 
     @Data
     public static class CreatedBy {
-        private String id;
         private String name;
         private String thumb;
     }

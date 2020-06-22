@@ -30,4 +30,8 @@ public class RecipeService {
     public void removeAll() {
         recipeRepository.deleteAll();
     }
+
+    public List<Recipe> getByUserId(final String id) {
+        return recipeRepository.findByUserId(id);
+    }
 }
