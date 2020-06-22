@@ -12,7 +12,7 @@ export class ProviderService {
 
   public getProviders(filter: { [p: string]: string[] | string }): Observable<any> {
     return this.userService.getProviders().pipe(
-      map(res => this.filterRestaurants(res, filter))
+      map(res => this.filterRestaurants(res, filter)),
     );
   }
 
@@ -25,22 +25,25 @@ export class ProviderService {
     return restaurants;
   }
 
-  private filterBySelections(reservations, filter) {
+  private filterBySelections(restaurants, filter) {
     for (const key in filter) {
       if (filter[key] && filter[key].length > 0) {
-        reservations = reservations.filter(r => {
+        restaurants = restaurants.filter(restaurant => {
           const f = filter[key];
           if (key !== 'restaurant' && key !== 'date') {
-            const fields = r[key];
-            for (let i = 0; i < fields.length; i++) {
-              return f.indexOf(fields[i]) !== -1;
+            const fields: string[] = restaurant[key];
+            for (const field of fields) {
+              if (f.indexOf(field) >= 0) {
+                return true;
+              }
             }
+            return false;
           }
           return true;
         });
       }
     }
-    return reservations;
+    return restaurants;
   }
 
   private searchByRestaurantName(restaurants: any, filter: any) {

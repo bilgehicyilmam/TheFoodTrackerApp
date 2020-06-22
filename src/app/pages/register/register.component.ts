@@ -28,7 +28,8 @@ export class RegisterComponent implements OnInit {
     details: '',
     restaurant: false,
     tags: [],
-    preferences: ''
+    preferences: '',
+    allergens: null
   };
 
 
@@ -48,6 +49,10 @@ export class RegisterComponent implements OnInit {
   formSubmitted() {
     const userThumbUpload = this.userPicture ? this.uploadService.uploadFile(this.userPicture) : of(null);
 
+    if (this.user.allergens) {
+      this.user.allergens = this.user.allergens.split(',').map(a => a.trim());
+    }
+
     userThumbUpload.pipe(flatMap(userThumbRes => {
       if (userThumbRes) {
         this.user.thumb = userThumbRes.Location;
@@ -61,7 +66,7 @@ export class RegisterComponent implements OnInit {
         return this.userService.login(this.user.email, this.user.password);
       }));
     })).subscribe(() => {
-      this.router.navigate(['providers']);
+      this.router.navigate(['recipes']);
     });
   }
 
